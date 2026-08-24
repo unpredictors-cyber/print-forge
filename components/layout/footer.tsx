@@ -2,7 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { useToast } from '@/components/ui/toast'
+import { PaymentMethodIcons } from '@/components/storefront/payment-methods'
 
 const COLUMNS = [
   {
@@ -51,6 +53,18 @@ const socials = [
 
 export function Footer() {
   const { toast } = useToast()
+  const [currency, setCurrency] = useState('United States (USD $)')
+  const [open, setOpen] = useState(false)
+  const selectorRef = useRef<HTMLDivElement>(null)
+  const currencies = ['United States (USD $)', 'Canada (CAD $)', 'United Kingdom (GBP £)', 'European Union (EUR €)']
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (selectorRef.current && !selectorRef.current.contains(event.target as Node)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [])
 
   return (
     <footer className="bg-foreground text-background">
@@ -82,16 +96,25 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-background/15">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row lg:px-8">
-          <Link href="/" className="text-sm font-bold text-background">PrintForge</Link>
-          <p className="text-center text-xs text-background/60">© 2026 PrintForge. All rights reserved.</p>
-          <div className="flex items-center gap-2" aria-label="Social links">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-5 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div ref={selectorRef} className="relative">
+              <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex items-center gap-2 rounded-md border border-background/20 bg-background/10 px-3 py-2 text-xs text-background hover:bg-background/20">{currency}<span aria-hidden="true">⌄</span></button>
+              {open && <div className="absolute bottom-full left-0 z-10 mb-2 w-56 rounded-lg border border-background/20 bg-foreground p-1 shadow-lg">{currencies.map((option) => <button key={option} type="button" onClick={() => { setCurrency(option); setOpen(false) }} className="block w-full rounded px-3 py-2 text-left text-xs text-background/80 hover:bg-background/10 hover:text-background">{option}</button>)}</div>}
+            </div>
+            <PaymentMethodIcons />
+          </div>
+          <div className="flex flex-col items-center justify-between gap-4 border-t border-background/15 pt-4 sm:flex-row">
+            <Link href="/" className="text-sm font-bold text-background">PrintForge</Link>
+            <p className="text-center text-xs text-background/60">© 2026 PrintForge. All rights reserved.</p>
+            <div className="flex items-center gap-2" aria-label="Social links">
             {socials.map((social) => (
               <Link key={social.label} href={social.href} aria-label={social.label} className="flex size-8 items-center justify-center rounded-full border border-background/20 bg-background/10 transition-colors hover:bg-background/20">
                 <Image src={social.src} alt="" width={14} height={14} loading="lazy" className="size-3.5 object-contain brightness-0 invert" />
               </Link>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </footer>
