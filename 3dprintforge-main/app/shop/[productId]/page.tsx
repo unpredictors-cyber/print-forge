@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { ProductConfigurator } from '@/components/storefront/product-configurator'
 import { RelatedProducts } from '@/components/storefront/related-products'
 import { ReviewSection } from '@/components/storefront/review-section'
+import { MobileCartBar } from '@/components/storefront/mobile-cart-bar'
 import { mockProducts, mockReviews } from '@/data/mockData'
 
 export async function generateMetadata({
@@ -66,11 +67,12 @@ export default async function ProductPage({
       </div>
 
       <ReviewSection reviews={productReviews} />
-      <RelatedProducts
-        currentProduct={product}
-        allProducts={mockProducts}
-        reviews={mockReviews}
-      />
-    </div>
+  <RelatedProducts
+  currentProduct={product}
+  allProducts={mockProducts}
+  reviews={mockReviews}
+  />
+  <MobileCartBar product={product} />
+  </div>
   )
 }

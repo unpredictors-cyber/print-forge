@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
+import { AnnouncementBar } from '@/components/layout/announcement-bar'
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar'
 import { CartDrawer } from '@/components/storefront/cart-drawer'
@@ -15,6 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-svh flex-col">
+      <AnnouncementBar />
       <Navbar />
       <main key={pathname} className="flex-1 animate-fade-in">{children}</main>
       <Footer />
