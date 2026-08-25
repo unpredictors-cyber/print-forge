@@ -33,9 +33,10 @@ export function SupportChatbot() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-40">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[60] flex justify-end p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:p-5 sm:pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+      <div className="pointer-events-auto flex max-w-full flex-col items-end">
       {open && (
-        <section className="mb-3 w-[min(360px,calc(100vw-2rem))] overflow-hidden rounded-md border border-border bg-card shadow-xl" aria-label="PrintForge assistant">
+        <section className="mb-3 max-h-[min(34rem,calc(100svh-6rem))] w-[min(360px,calc(100vw-2rem))] overflow-hidden rounded-md border border-border bg-card shadow-2xl" aria-label="PrintForge assistant">
           <div className="flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground">
             <div className="flex items-center gap-2"><Bot className="size-4" /><span className="text-sm font-semibold">PrintForge assistant</span></div>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close chat"><X className="size-4" /></button>
@@ -51,6 +52,7 @@ export function SupportChatbot() {
         </section>
       )}
       <button type="button" onClick={() => setOpen((value) => !value)} className="ml-auto flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105" aria-label={open ? 'Close support chat' : 'Open support chat'}><MessageCircle className="size-5" /></button>
+      </div>
     </div>
   )
 }

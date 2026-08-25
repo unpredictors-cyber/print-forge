@@ -51,9 +51,9 @@ export function Navbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Wishlist" />}><Heart className="size-4.5" /></Button>
-          <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />}><Search className="size-4.5" /></Button>
-          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />}><User className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Wishlist" />} className="text-background hover:bg-background/10 hover:text-primary focus-visible:ring-primary"><Heart className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />} className="text-background hover:bg-background/10 hover:text-primary focus-visible:ring-primary"><Search className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />} className="text-background hover:bg-background/10 hover:text-primary focus-visible:ring-primary"><User className="size-4.5" /></Button>
           {user && <Button variant="ghost" size="sm" onClick={() => signOut()} className="hidden text-xs font-medium text-muted-foreground hover:text-background lg:inline-flex">Sign out</Button>}
           <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
