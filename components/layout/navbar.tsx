@@ -13,8 +13,8 @@ const PRODUCTS = [
   { id: 'prod-honeycomb-controller-stand', label: 'Honeycomb Controller Stand' },
   { id: 'prod-dual-honeycomb-controller-stand', label: 'Dual Honeycomb Controller Stand' },
   { id: 'prod-dragon-headphone-stand', label: 'Dragon Headphone Stand' },
-  { id: 'prod-phone-stand', label: 'Nexus Max Organizer' },
-  { id: 'prod-hex-shelves', label: 'Milk Crate Organizer' },
+  { id: 'prod-nexus-max-organizer', label: 'Nexus Max Organizer' },
+  { id: 'prod-milk-crate-organizer', label: 'Milk Crate Organizer' },
 ]
 
 export function Navbar() {

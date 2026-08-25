@@ -20,8 +20,8 @@ export function ProductCard({ product, reviews }: { product: Product; reviews: R
     'prod-honeycomb-controller-stand': 12,
     'prod-dual-honeycomb-controller-stand': 18,
     'prod-dragon-headphone-stand': 15,
-    'prod-phone-stand': 21,
-    'prod-hex-shelves': 9,
+    'prod-nexus-max-organizer': 21,
+    'prod-milk-crate-organizer': 9,
   }
   const discount = discountByProduct[product.id] ?? 10
   const originalPrice = Math.round(product.price / (1 - discount / 100))
@@ -32,7 +32,7 @@ export function ProductCard({ product, reviews }: { product: Product; reviews: R
     window.setTimeout(() => setAdded(false), 1400)
     openCart()
   }
-  return <article className="group animate-fade-up relative flex h-full flex-col overflow-hidden rounded-md border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+  return <article className="group animate-fade-up relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
     <div className="absolute left-3 top-3 z-10 rounded-sm bg-destructive px-2 py-1 text-xs font-bold text-destructive-foreground">{discount}% off</div>
     <button aria-label="Add to wishlist" onClick={() => toast('Added to wishlist', { variant: 'success' })} className="absolute right-3 top-3 z-10 rounded-full bg-card/90 p-2 text-muted-foreground shadow-sm hover:text-destructive"><Heart className="size-4" /></button>
     <Link href={`/shop/${product.id}`} className="group/image relative aspect-square overflow-hidden bg-muted"><Image src={product.images[0] || '/placeholder.svg'} alt={product.name} fill className="object-cover transition-all duration-300 group-hover/image:scale-[1.03] group-hover/image:opacity-0" sizes="270px" /><Image src={product.images[1] || product.images[0] || '/placeholder.svg'} alt={`${product.name} alternate view`} fill className="object-cover opacity-0 transition-all duration-300 group-hover/image:scale-[1.03] group-hover/image:opacity-100" sizes="270px" /></Link>

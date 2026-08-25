@@ -106,7 +106,7 @@ export const mockProducts: Product[] = [
     is_published: true,
   },
   {
-    id: 'prod-phone-stand',
+    id: 'prod-nexus-max-organizer',
     name: 'Nexus Max Organizer',
     description:
       'A single-piece phone stand with a 62° viewing angle, cable pass-through, and rubberized feet. Fits phones and small tablets with or without a case.',
@@ -124,7 +124,7 @@ export const mockProducts: Product[] = [
     is_published: true,
   },
   {
-    id: 'prod-hex-shelves',
+    id: 'prod-milk-crate-organizer',
     name: 'Milk Crate Organizer',
     description:
       'A set of three interlocking hexagonal wall shelves with concealed mounting brackets. Arrange them in honeycomb clusters or spread them across a wall.',
@@ -157,14 +157,24 @@ export const CATEGORIES = [
   'organization',
 ]
 
-export const mockReviews: Review[] = [
-  ...mockProducts.flatMap((product, productIndex) => [
-    { id: `rev-${productIndex}-1`, product_id: product.id, user_id: 'user-2', user_name: 'Maya R.', rating: 5, comment: `Beautifully finished and thoughtfully designed. The ${product.name.toLowerCase()} feels made for my space.`, created_at: '2026-07-14T10:22:00Z' },
-    { id: `rev-${productIndex}-2`, product_id: product.id, user_id: 'user-3', user_name: 'Daniel K.', rating: productIndex % 2 ? 4 : 5, comment: 'Solid print quality, clean edges, and it arrived earlier than expected.', created_at: '2026-07-28T15:40:00Z' },
-    { id: `rev-${productIndex}-3`, product_id: product.id, user_id: 'user-4', user_name: 'Sofia L.', rating: 4, comment: 'A practical piece with a polished finish. I would happily order another one.', created_at: '2026-08-05T09:05:00Z' },
-    { id: `rev-${productIndex}-4`, product_id: product.id, user_id: 'user-5', user_name: 'Ahmed B.', rating: 3 + (productIndex % 3), comment: 'Great value and exactly as pictured. The material feels pleasantly durable.', created_at: '2026-08-12T12:30:00Z' },
-  ]),
-]
+const REVIEW_COUNTS = [3, 11, 6, 19, 2]
+const REVIEWERS = ['Maya R.', 'Daniel K.', 'Sofia L.', 'Ahmed B.', 'Priya S.', 'Noah T.', 'Lena W.', 'Chris J.']
+
+export const mockReviews: Review[] = mockProducts.flatMap((product, productIndex) =>
+  Array.from({ length: REVIEW_COUNTS[productIndex] ?? 4 }, (_, reviewIndex) => ({
+    id: `rev-${productIndex}-${reviewIndex + 1}`,
+    product_id: product.id,
+    user_id: `user-${reviewIndex + 2}`,
+    user_name: REVIEWERS[reviewIndex % REVIEWERS.length],
+    rating: reviewIndex % 5 === 3 ? 4 : 5,
+    comment: reviewIndex % 3 === 0
+      ? `Beautifully finished and thoughtfully designed. The ${product.name.toLowerCase()} feels made for my space.`
+      : reviewIndex % 3 === 1
+        ? 'Solid print quality, clean edges, and it arrived earlier than expected.'
+        : 'A practical piece with a polished finish. I would happily order another one.',
+    created_at: `2026-08-${String(5 + (reviewIndex % 20)).padStart(2, '0')}T09:05:00Z`,
+  })),
+)
 
 export const mockOrders: Order[] = [
   {

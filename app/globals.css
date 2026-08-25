@@ -49,40 +49,40 @@
 
 :root {
   color-scheme: light;
-  /* Workshop palette: warm paper, charcoal ink, and burnt amber */
-  --background: oklch(0.965 0.018 85);
-  --foreground: oklch(0.19 0.018 55);
-  --card: oklch(0.99 0.008 85);
-  --card-foreground: oklch(0.19 0.018 55);
-  --popover: oklch(0.99 0.008 85);
-  --popover-foreground: oklch(0.19 0.018 55);
-  --primary: oklch(0.23 0.018 55);
-  --primary-foreground: oklch(0.98 0.01 85);
-  --secondary: oklch(0.9 0.025 80);
-  --secondary-foreground: oklch(0.19 0.018 55);
-  --muted: oklch(0.91 0.02 80);
-  --muted-foreground: oklch(0.46 0.025 55);
-  --accent: oklch(0.64 0.14 55);
-  --accent-foreground: oklch(0.98 0.01 85);
-  --destructive: oklch(0.55 0.2 25);
-  --success: oklch(0.55 0.16 150);
-  --border: oklch(0.84 0.025 75);
-  --input: oklch(0.84 0.025 75);
-  --ring: oklch(0.64 0.14 55);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.708 0.165 254.624);
-  --chart-4: oklch(0.809 0.105 251.813);
-  --chart-5: oklch(0.882 0.059 254.128);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.208 0.042 265.755); /* slate-900 admin sidebar */
-  --sidebar-foreground: oklch(0.929 0.013 255.508);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.279 0.041 260.031);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  /* PrintForge premium maker palette */
+  --background: #f6f0e6;
+  --foreground: #101827;
+  --card: #fffdf8;
+  --card-foreground: #101827;
+  --popover: #fffdf8;
+  --popover-foreground: #101827;
+  --primary: #c65d2e;
+  --primary-foreground: #fffdf8;
+  --secondary: #e9ddc8;
+  --secondary-foreground: #101827;
+  --muted: #d7d0c5;
+  --muted-foreground: #526174;
+  --accent: #0f766e;
+  --accent-foreground: #fffdf8;
+  --destructive: #c65d2e;
+  --success: #18794e;
+  --border: #d7d0c5;
+  --input: #526174;
+  --ring: #0f766e;
+  --chart-1: #c65d2e;
+  --chart-2: #0f766e;
+  --chart-3: #101827;
+  --chart-4: #526174;
+  --chart-5: #e9ddc8;
+  --radius: 0.75rem;
+  --sidebar: #243041;
+  --sidebar-foreground: #fffdf8;
+  --sidebar-primary: #c65d2e;
+  --sidebar-primary-foreground: #fffdf8;
+  --sidebar-accent: #0f766e;
+  --sidebar-accent-foreground: #fffdf8;
+  --sidebar-border: #526174;
+  --sidebar-ring: #0f766e;
 }
 
 @layer base {
