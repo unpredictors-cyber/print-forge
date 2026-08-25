@@ -74,9 +74,9 @@ export const mockProducts: Product[] = [
     size_reference: 'Approx. 14cm x 14cm x 16cm, shown next to a coffee mug for scale.',
     price: 219,
     images: [
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548-ocfC347gV0cOK3Xw3q8VfnS5aQji0j.png',
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548%20%282%29-zSIeUuP9b5sghaCfkg7kTR4sFalyve.png',
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104550%20%281%29-K6QUfIOdKaSXCFysp2fWRxcpozKapC.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104551%20%284%29-r7A8dnB9paQJuqRGDWp4R8OAoLSGlL.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104549%20%282%29-QQUQo867Us0OawgXlle7cvXInNPecU.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104550%20%283%29-QTVKWJEEY0GzjGhkJ0wb6q7aPoIytx.png',
     ],
     available_colors: [COLORS.white, COLORS.teal, COLORS.coral, COLORS.sand],
     available_materials: [MATERIALS[0], MATERIALS[1], MATERIALS[2]],
