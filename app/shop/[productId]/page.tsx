@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ProductConfigurator } from '@/components/storefront/product-configurator'
+import { ProductGallery } from '@/components/storefront/product-gallery'
 import { RelatedProducts } from '@/components/storefront/related-products'
 import { ReviewSection } from '@/components/storefront/review-section'
 import { mockProducts, mockReviews } from '@/data/mockData'
@@ -50,16 +50,7 @@ export default async function ProductPage({
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="animate-fade-in relative aspect-square overflow-hidden rounded-md border border-border bg-muted">
-          <Image
-            src={product.images[0] || '/placeholder.svg'}
-            alt={product.name}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        </div>
+        <ProductGallery images={product.images} name={product.name} />
         <div className="animate-fade-up">
           <ProductConfigurator product={product} reviews={productReviews} />
         </div>
