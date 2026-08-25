@@ -55,7 +55,7 @@ export const mockProducts: Product[] = [
     price: 179,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104544-okLFR4ho4Kvk3NhRhMzDMOUqsN5yX8.png',
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548%20%281%29-l6JSjEPV0ZxIL1Rha6ApEr13zqlmHu.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104551%20%281%29-UB8CKjYFY9Q2LnprUhkrSBXNRA88Sv.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104546-Rm7Gh0m2JLiF8YqfGrGD43U1xiBR4I.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104545-4E76f8WYWx8JpsEOEMDxiZEbtVL3Kn.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104547-FzGwbW3x5p07VfUBHVi5jQ95c1ftDU.png',
@@ -75,7 +75,8 @@ export const mockProducts: Product[] = [
     price: 219,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548-ocfC347gV0cOK3Xw3q8VfnS5aQji0j.png',
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104549-7FqU3zHZKwcUwIRiF8ar0eAydzsXP0.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548%20%282%29-zSIeUuP9b5sghaCfkg7kTR4sFalyve.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104550%20%281%29-K6QUfIOdKaSXCFysp2fWRxcpozKapC.png',
     ],
     available_colors: [COLORS.white, COLORS.teal, COLORS.coral, COLORS.sand],
     available_materials: [MATERIALS[0], MATERIALS[1], MATERIALS[2]],
@@ -92,6 +93,7 @@ export const mockProducts: Product[] = [
     price: 189,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104555%20%281%29-UwxjWzmmCyu8zPxicJC74jgDh92jIK.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104553%20%281%29-XAIhaRPTr9jpXM9LzzoEfKqZgT3JPV.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104554-G37FzwBvV1gtaUHTlw6daiF9bBCWki.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104552-FZI6o51T8t9m0Gx9yoB9damqQFVRgs.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104555-xAKfYbAdazWfu7RROnNBB19smPioXB.png',
