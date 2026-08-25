@@ -37,12 +37,12 @@ export function SupportChatbot() {
       <div className="pointer-events-auto flex max-w-full flex-col items-end">
       {open && (
         <section className="mb-3 max-h-[min(34rem,calc(100svh-6rem))] w-[min(360px,calc(100vw-2rem))] overflow-hidden rounded-md border border-border bg-card shadow-2xl" aria-label="PrintForge assistant">
-          <div className="flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground">
+          <div className="flex items-center justify-between bg-foreground px-4 py-3 text-background">
             <div className="flex items-center gap-2"><Bot className="size-4" /><span className="text-sm font-semibold">PrintForge assistant</span></div>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close chat"><X className="size-4" /></button>
           </div>
           <div className="max-h-72 space-y-3 overflow-y-auto p-4">
-            {messages.map((message, index) => <div key={`${message.from}-${index}`} className={`max-w-[85%] rounded-md px-3 py-2 text-sm leading-relaxed ${message.from === 'user' ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted text-foreground'}`}>{message.text}</div>)}
+            {messages.map((message, index) => <div key={`${message.from}-${index}`} className={`max-w-[85%] rounded-md px-3 py-2 text-sm leading-relaxed ${message.from === 'user' ? 'ml-auto bg-secondary text-secondary-foreground' : 'bg-muted text-foreground'}`}>{message.text}</div>)}
           </div>
           <Link href="/account" className="mx-3 mb-2 flex items-center justify-center gap-2 rounded-md border border-border px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted"><Ticket className="size-3.5" /> Open a support ticket</Link>
           <div className="flex gap-2 border-t border-border p-3">
@@ -51,7 +51,7 @@ export function SupportChatbot() {
           </div>
         </section>
       )}
-      <button type="button" onClick={() => setOpen((value) => !value)} className="ml-auto flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105" aria-label={open ? 'Close support chat' : 'Open support chat'}><MessageCircle className="size-5" /></button>
+      <button type="button" onClick={() => setOpen((value) => !value)} className="ml-auto flex size-12 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-transform hover:scale-105" aria-label={open ? 'Close support chat' : 'Open support chat'}><MessageCircle className="size-5" /></button>
       </div>
     </div>
   )

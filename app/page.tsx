@@ -34,7 +34,7 @@ export default function HomePage() {
         <div className="relative w-full overflow-hidden rounded-none bg-card shadow-sm lg:rounded-b-2xl">
           <div key={slide} className="grid min-h-[360px] items-stretch md:grid-cols-[.9fr_1.1fr] lg:min-h-[370px]" aria-live="polite">
             <div className="hero-slide-copy relative z-10 flex flex-col justify-center px-6 py-6 sm:px-10 sm:py-7 lg:px-12">
-              <p className="text-xs font-bold uppercase tracking-[.2em] text-primary">{current.label}</p>
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-muted-foreground">{current.label}</p>
               <h1 className="mt-3 max-w-xl text-3xl font-black tracking-tight text-card-foreground sm:text-4xl lg:text-5xl">{current.title}</h1>
               <p className="mt-4 max-w-md leading-7 text-muted-foreground">{current.copy}</p>
               <Link href="/shop" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{current.cta}<ArrowRight className="size-4" /></Link>
@@ -61,5 +61,5 @@ function TrustStrip() {
 }
 
 function ProductRail({ title, eyebrow, products, accent = false }: { title: string; eyebrow: string; products: typeof mockProducts; accent?: boolean }) {
-  return <section className="w-full px-4 pt-16 sm:px-6 lg:px-10"><div className="flex items-end justify-between"><div><p className={`text-xs font-bold uppercase tracking-[.18em] ${accent ? 'text-accent' : 'text-primary'}`}>{eyebrow}</p><h2 className="mt-2 text-2xl font-black text-card-foreground">{title}</h2></div><Link href="/shop" className="flex items-center gap-1 text-sm font-bold text-primary">View all <ArrowRight className="size-4" /></Link></div><div className="-mx-4 mt-5 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">{products.map((product) => <div key={product.id} className="w-[250px] shrink-0 snap-start sm:w-[270px]"><ProductCard product={product} reviews={mockReviews} /></div>)}</div></section>
+  return <section className="w-full px-4 pt-16 sm:px-6 lg:px-10"><div className="flex items-end justify-between"><div><p className={`text-xs font-bold uppercase tracking-[.18em] text-muted-foreground`}>{eyebrow}</p><h2 className="mt-2 text-2xl font-black text-card-foreground">{title}</h2></div><Link href="/shop" className="flex items-center gap-1 text-sm font-bold text-primary">View all <ArrowRight className="size-4" /></Link></div><div className="-mx-4 mt-5 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">{products.map((product) => <div key={product.id} className="w-[250px] shrink-0 snap-start sm:w-[270px]"><ProductCard product={product} reviews={mockReviews} /></div>)}</div></section>
 }

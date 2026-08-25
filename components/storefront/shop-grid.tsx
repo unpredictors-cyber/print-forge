@@ -31,7 +31,7 @@ export function ShopGrid() {
         <h2 className="mb-3 flex items-center gap-2 text-sm font-bold text-foreground"><SlidersHorizontal className="size-4 text-accent" aria-hidden /> Categories</h2>
         <div className="flex flex-wrap gap-2 lg:flex-col">
           {['all', ...CATEGORIES].map((cat) => (
-            <button key={cat} type="button" onClick={() => setCategory(cat)} className={cn('rounded-lg px-3 py-2 text-left text-sm capitalize transition-colors', category === cat ? 'bg-primary font-bold text-primary-foreground shadow-sm' : 'bg-card text-muted-foreground hover:bg-secondary hover:text-foreground')}>
+            <button key={cat} type="button" onClick={() => setCategory(cat)} className={cn('rounded-lg px-3 py-2 text-left text-sm capitalize transition-colors', category === cat ? 'bg-foreground font-bold text-background shadow-sm' : 'bg-card text-muted-foreground hover:bg-secondary hover:text-foreground')}>
               {cat === 'all' ? 'All products' : cat}
             </button>
           ))}
