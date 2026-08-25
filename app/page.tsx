@@ -29,12 +29,12 @@ export default function HomePage() {
   const advance = (direction: number) => setSlide((slide + direction + slides.length) % slides.length)
 
   return (
-    <main className="w-full min-h-screen bg-background">
+    <main className="w-full min-h-screen overflow-x-hidden bg-background">
       <section className="w-full pt-0">
         <div className="relative w-full overflow-hidden rounded-none bg-card shadow-sm lg:rounded-b-2xl">
           <div key={slide} className="grid min-h-[360px] items-stretch md:grid-cols-[.9fr_1.1fr] lg:min-h-[370px]" aria-live="polite">
             <div className="hero-slide-copy relative z-10 flex flex-col justify-center px-6 py-6 sm:px-10 sm:py-7 lg:px-12">
-              <p className="text-xs font-bold uppercase tracking-[.2em] text-primary">{current.label}</p>
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-muted-foreground">{current.label}</p>
               <h1 className="mt-3 max-w-xl text-3xl font-black tracking-tight text-card-foreground sm:text-4xl lg:text-5xl">{current.title}</h1>
               <p className="mt-4 max-w-md leading-7 text-muted-foreground">{current.copy}</p>
               <Link href="/shop" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:bg-primary/90">{current.cta}<ArrowRight className="size-4" /></Link>
@@ -50,7 +50,7 @@ export default function HomePage() {
       <ProductRail title="Best Selling Products" eyebrow="PrintForge picks" products={products.slice(0, 5)} />
       <ProductRail title="New Arrivals" eyebrow="Just landed" products={products.slice(3, 8)} />
       <ProductRail title="Hot Deals" eyebrow="Limited time" products={products.slice().reverse().slice(0, 5)} accent />
-      <section className="w-full px-4 py-16 sm:px-6 lg:px-10"><div className="grid gap-4 rounded-2xl bg-primary p-6 text-primary-foreground sm:grid-cols-[1fr_auto] sm:items-center sm:p-10"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-primary-foreground/70">For businesses & makers</p><h2 className="mt-2 text-2xl font-black">Need more than one?</h2><p className="mt-2 text-sm text-primary-foreground/80">Get dedicated pricing and support for bulk orders, custom printing, and workshop setups.</p></div><Link href="/policies/bulk-enquiry" className="inline-flex items-center justify-center gap-2 rounded-md bg-card px-5 py-3 text-sm font-bold text-primary">Bulk enquiry <ArrowRight className="size-4" /></Link></div></section>
+      <section className="w-full px-4 py-16 sm:px-6 lg:px-10"><div className="grid gap-4 rounded-2xl border border-border bg-muted p-6 text-foreground shadow-sm sm:grid-cols-[1fr_auto] sm:items-center sm:p-10"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">For businesses & makers</p><h2 className="mt-2 text-2xl font-black text-foreground">Need more than one?</h2><p className="mt-2 text-sm text-muted-foreground">Get dedicated pricing and support for bulk orders, custom printing, and workshop setups.</p></div><Link href="/policies/bulk-enquiry" className="inline-flex items-center justify-center gap-2 rounded-md bg-foreground px-5 py-3 text-sm font-bold text-background transition-colors hover:bg-foreground/90">Bulk enquiry <ArrowRight className="size-4" /></Link></div></section>
     </main>
   )
 }
@@ -61,5 +61,5 @@ function TrustStrip() {
 }
 
 function ProductRail({ title, eyebrow, products, accent = false }: { title: string; eyebrow: string; products: typeof mockProducts; accent?: boolean }) {
-  return <section className="w-full px-4 pt-16 sm:px-6 lg:px-10"><div className="flex items-end justify-between"><div><p className={`text-xs font-bold uppercase tracking-[.18em] ${accent ? 'text-accent' : 'text-primary'}`}>{eyebrow}</p><h2 className="mt-2 text-2xl font-black text-card-foreground">{title}</h2></div><Link href="/shop" className="flex items-center gap-1 text-sm font-bold text-primary">View all <ArrowRight className="size-4" /></Link></div><div className="-mx-4 mt-5 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">{products.map((product) => <div key={product.id} className="w-[250px] shrink-0 snap-start sm:w-[270px]"><ProductCard product={product} reviews={mockReviews} /></div>)}</div></section>
+  return <section className="w-full px-4 pt-16 sm:px-6 lg:px-10"><div className="flex items-end justify-between"><div><p className={`text-xs font-bold uppercase tracking-[.18em] text-muted-foreground`}>{eyebrow}</p><h2 className="mt-2 text-2xl font-black text-card-foreground">{title}</h2></div><Link href="/shop" className="flex items-center gap-1 text-sm font-bold text-primary">View all <ArrowRight className="size-4" /></Link></div><div className="-mx-4 mt-5 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">{products.map((product) => <div key={product.id} className="w-[250px] shrink-0 snap-start sm:w-[270px]"><ProductCard product={product} reviews={mockReviews} /></div>)}</div></section>
 }

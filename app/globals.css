@@ -68,7 +68,7 @@
   --success: #18794e;
   --border: #8a93a3;
   --input: #8a93a3;
-  --ring: #3b82f6;
+  --ring: #22d3ee;
   --chart-1: #3b82f6;
   --chart-2: #22d3ee;
   --chart-3: #1c1f26;
@@ -228,7 +228,7 @@
   @apply mb-1;
 }
 .prose-content a {
-  @apply text-primary underline underline-offset-4;
+  @apply text-foreground underline underline-offset-4 transition-colors hover:text-accent;
 }
 .prose-content blockquote {
   @apply border-l-2 border-primary pl-4 italic text-muted-foreground;

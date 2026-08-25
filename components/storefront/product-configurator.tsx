@@ -99,7 +99,7 @@ export function ProductConfigurator({
               aria-pressed={color.name === c.name}
               className={cn(
                 'relative size-9 rounded-full border transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none',
-                color.name === c.name ? 'border-primary ring-2 ring-primary/40' : 'border-border',
+                color.name === c.name ? 'border-accent ring-2 ring-accent/40' : 'border-border',
               )}
               style={{ backgroundColor: c.hex }}
             >

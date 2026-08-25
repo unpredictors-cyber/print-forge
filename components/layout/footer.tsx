@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useToast } from '@/components/ui/toast'
@@ -45,10 +44,10 @@ const COLUMNS = [
 ]
 
 const socials = [
-  { label: 'Facebook', href: 'https://www.facebook.com', src: 'https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/facebook/default.svg' },
-  { label: 'Instagram', href: 'https://www.instagram.com', src: 'https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/instagram/default.svg' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com', src: 'https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg' },
-  { label: 'YouTube', href: 'https://www.youtube.com', src: 'https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/youtube/default.svg' },
+  { label: 'Facebook', href: 'https://www.facebook.com', mark: 'f' },
+  { label: 'Instagram', href: 'https://www.instagram.com', mark: '◎' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com', mark: 'in' },
+  { label: 'YouTube', href: 'https://www.youtube.com', mark: '▶' },
 ]
 
 export function Footer() {
@@ -110,7 +109,7 @@ export function Footer() {
             <div className="flex items-center gap-2" aria-label="Social links">
             {socials.map((social) => (
               <Link key={social.label} href={social.href} aria-label={social.label} className="flex size-8 items-center justify-center rounded-full border border-background/20 bg-background/10 transition-colors hover:bg-background/20">
-                <Image src={social.src} alt="" width={14} height={14} loading="lazy" className="size-3.5 object-contain brightness-0 invert" />
+                <span className="font-sans text-xs font-black leading-none tracking-tight text-background" aria-hidden="true">{social.mark}</span>
               </Link>
             ))}
           </div>

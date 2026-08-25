@@ -57,7 +57,7 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
       <div className={compact ? 'w-full' : 'animate-fade-up w-full max-w-md'}>
         <div className={compact ? 'mb-4 flex flex-col items-center gap-2 text-center' : 'mb-8 flex flex-col items-center gap-3 text-center'}>
           {!compact && (
-            <span className="flex size-11 items-center justify-center rounded-md bg-primary">
+            <span className="flex size-11 items-center justify-center rounded-md bg-accent">
               <Box className="size-6 text-primary-foreground" aria-hidden />
             </span>
           )}
@@ -162,14 +162,14 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
           {isLogin ? (
             <>
               Don&apos;t have an account?{' '}
-              <Link href="/register" className="font-medium text-primary hover:underline">
+              <Link href="/register" className="font-medium text-foreground underline-offset-4 hover:underline">
                 Sign up
               </Link>
             </>
           ) : (
             <>
               Already have an account?{' '}
-              <Link href="/login" className="font-medium text-primary hover:underline">
+              <Link href="/login" className="font-medium text-foreground underline-offset-4 hover:underline">
                 Sign in
               </Link>
             </>

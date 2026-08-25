@@ -57,7 +57,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const icons: Record<ToastVariant, ReactNode> = {
     success: <CheckCircle2 className="size-4.5 text-success" aria-hidden />,
     error: <XCircle className="size-4.5 text-destructive" aria-hidden />,
-    info: <Info className="size-4.5 text-primary" aria-hidden />,
+    info: <Info className="size-4.5 text-accent" aria-hidden />,
   }
 
   return (

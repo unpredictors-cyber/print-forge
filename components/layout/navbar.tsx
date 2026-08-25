@@ -31,12 +31,12 @@ export function Navbar() {
     <header className={`z-50 border-b border-border bg-foreground backdrop-blur-sm ${isHome ? 'relative' : 'relative'}`}>
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="PrintForge home">
-          <span className="flex size-8 items-center justify-center rounded-md bg-primary"><Box className="size-4.5 text-primary-foreground" aria-hidden /></span>
-          <span className="text-lg font-semibold tracking-tight">PrintForge</span>
+          <span className="flex size-8 items-center justify-center rounded-md bg-accent"><Box className="size-4.5 text-primary-foreground" aria-hidden /></span>
+          <span className="text-lg font-semibold tracking-tight text-background">PrintForge</span>
         </Link>
 
         <nav className="mx-auto hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Main navigation">
-          <Link href="/" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Home</Link>
+          <Link href="/" className="rounded-md px-3 py-2 text-sm font-bold text-background transition-colors hover:bg-transparent hover:text-accent hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-0">Home</Link>
           <div className="relative" onMouseLeave={() => setProductsOpen(false)}>
             <button type="button" onClick={() => setProductsOpen((open) => !open)} aria-expanded={productsOpen} className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">
               Products <ChevronDown className="size-3.5" />
@@ -45,18 +45,18 @@ export function Navbar() {
               {PRODUCTS.map((product) => <Link key={product.id} href={`/shop/${product.id}`} onClick={closeMenus} className="block rounded-md px-3 py-2.5 text-sm text-popover-foreground hover:bg-muted">{product.label}</Link>)}
             </div>}
           </div>
-          <Link href="/blog" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Blog</Link>
-          <Link href="/policies/contact" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Contact Us</Link>
-          {user && user.role !== 'CUSTOMER' && <Link href="/admin" className="rounded-md px-3 py-2 text-sm font-medium text-primary hover:bg-muted">Admin</Link>}
+          <Link href="/blog" className="rounded-md px-3 py-2 text-sm font-bold text-background transition-colors hover:bg-transparent hover:text-accent hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-0">Blog</Link>
+          <Link href="/policies/contact" className="rounded-md px-3 py-2 text-sm font-bold text-background transition-colors hover:bg-transparent hover:text-accent hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-0">Contact Us</Link>
+          {user && user.role !== 'CUSTOMER' && <Link href="/admin" className="rounded-md px-3 py-2 text-sm font-medium text-background hover:bg-transparent hover:text-accent hover:underline hover:underline-offset-4">Admin</Link>}
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Wishlist" />}><Heart className="size-4.5" /></Button>
-          <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />}><Search className="size-4.5" /></Button>
-          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />}><User className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Wishlist" />} className="text-background transition-colors hover:bg-transparent hover:text-accent focus-visible:ring-accent"><Heart className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />} className="text-background transition-colors hover:bg-transparent hover:text-accent focus-visible:ring-accent"><Search className="size-4.5" /></Button>
+          <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />} className="text-background transition-colors hover:bg-transparent hover:text-accent focus-visible:ring-accent"><User className="size-4.5" /></Button>
           {user && <Button variant="ghost" size="sm" onClick={() => signOut()} className="hidden text-xs font-medium text-muted-foreground hover:text-background lg:inline-flex">Sign out</Button>}
-          <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
+          <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative text-background hover:bg-transparent hover:text-accent focus-visible:ring-accent"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
+          <Button variant="ghost" size="icon" className="text-background hover:bg-transparent hover:text-accent focus-visible:ring-accent md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
         </div>
       </div>
 

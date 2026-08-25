@@ -37,7 +37,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
         </>}
       </div>
       {gallery.length > 1 && <div className="flex gap-2 overflow-x-auto pb-1" role="list" aria-label={`${name} image thumbnails`}>
-        {gallery.map((image, index) => <button key={`${image}-${index}`} type="button" aria-label={`Show image ${index + 1}`} aria-current={activeIndex === index} onClick={() => setActiveIndex(index)} className={`relative size-16 shrink-0 overflow-hidden rounded border-2 bg-muted transition ${activeIndex === index ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'}`}><Image src={image} alt="" fill className="object-cover" sizes="64px" /></button>)}
+        {gallery.map((image, index) => <button key={`${image}-${index}`} type="button" aria-label={`Show image ${index + 1}`} aria-current={activeIndex === index} onClick={() => setActiveIndex(index)} className={`relative size-16 shrink-0 overflow-hidden rounded border-2 bg-muted transition ${activeIndex === index ? 'border-accent' : 'border-transparent opacity-70 hover:opacity-100'}`}><Image src={image} alt="" fill className="object-cover" sizes="64px" /></button>)}
       </div>}
     </div>
   )
