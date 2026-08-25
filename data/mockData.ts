@@ -52,9 +52,10 @@ export const mockProducts: Product[] = [
     description:
       'A modular desk organizer with angled pen slots, a phone groove, and trays for clips and cards. Printed as a single seamless piece with a matte finish that resists scratches and fingerprints.',
     size_reference: 'Approx. 18cm x 12cm x 8cm, shown next to a coffee mug for scale.',
-    price: 34,
+    price: 179,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104544-okLFR4ho4Kvk3NhRhMzDMOUqsN5yX8.png',
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548%20%281%29-l6JSjEPV0ZxIL1Rha6ApEr13zqlmHu.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104546-Rm7Gh0m2JLiF8YqfGrGD43U1xiBR4I.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104545-4E76f8WYWx8JpsEOEMDxiZEbtVL3Kn.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104547-FzGwbW3x5p07VfUBHVi5jQ95c1ftDU.png',
@@ -71,7 +72,7 @@ export const mockProducts: Product[] = [
     description:
       'An organic voronoi-pattern planter with a hidden drainage tray. The lattice walls keep roots aerated while the sculptural silhouette looks great on shelves and windowsills.',
     size_reference: 'Approx. 14cm x 14cm x 16cm, shown next to a coffee mug for scale.',
-    price: 28,
+    price: 219,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104548-ocfC347gV0cOK3Xw3q8VfnS5aQji0j.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104549-7FqU3zHZKwcUwIRiF8ar0eAydzsXP0.png',
@@ -88,8 +89,9 @@ export const mockProducts: Product[] = [
     description:
       'A print-in-place articulated dragon with 40+ flexible joints. No assembly required — it slithers, curls, and poses straight off the printer. A favorite desk toy and gift.',
     size_reference: 'Approx. 22cm x 6cm x 9cm, shown next to a coffee mug for scale.',
-    price: 24,
+    price: 189,
     images: [
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104555%20%281%29-UwxjWzmmCyu8zPxicJC74jgDh92jIK.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104554-G37FzwBvV1gtaUHTlw6daiF9bBCWki.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104552-FZI6o51T8t9m0Gx9yoB9damqQFVRgs.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104555-xAKfYbAdazWfu7RROnNBB19smPioXB.png',
@@ -107,7 +109,7 @@ export const mockProducts: Product[] = [
     description:
       'A single-piece phone stand with a 62° viewing angle, cable pass-through, and rubberized feet. Fits phones and small tablets with or without a case.',
     size_reference: 'Approx. 12cm x 8cm x 10cm, shown next to a coffee mug for scale.',
-    price: 16,
+    price: 169,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104557-R309oWvlvW1eZCNMBawPOe6QXDZDqm.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104558-qMRiLcGbe2NjyDAIAx4dUCuBeOe2js.png',
@@ -125,7 +127,7 @@ export const mockProducts: Product[] = [
     description:
       'A set of three interlocking hexagonal wall shelves with concealed mounting brackets. Arrange them in honeycomb clusters or spread them across a wall.',
     size_reference: 'Approx. 30cm x 10cm x 30cm, shown next to a coffee mug for scale.',
-    price: 52,
+    price: 199,
     images: [
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104560-odgKzWOoocdInjcrzcnb2hLJB3dDmP.png',
       'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000104563-BHdAEbBCFFnz95i75oRD9XjpS0ojpU.png',
