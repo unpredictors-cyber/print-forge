@@ -67,7 +67,7 @@ export function Footer() {
   }, [])
 
   return (
-    <footer className="bg-[#243041] text-background">
+    <footer className="bg-foreground text-background">
       <div className="mx-auto grid max-w-7xl gap-8 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:px-8">
         {COLUMNS.map((column) => (
           <nav key={column.heading} aria-label={column.heading}>

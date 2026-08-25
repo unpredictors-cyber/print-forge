@@ -14,9 +14,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   if (isAdminRoute) return <>{children}</>
 
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="flex min-h-svh w-full min-w-0 flex-col overflow-x-hidden">
       <Navbar />
-      <main key={pathname} className="flex-1 animate-fade-in">{children}</main>
+      <main key={pathname} className="flex min-w-0 flex-1 animate-fade-in">{children}</main>
       <Footer />
       <CartDrawer />
       <SupportChatbot />

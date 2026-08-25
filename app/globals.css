@@ -49,40 +49,40 @@
 
 :root {
   color-scheme: light;
-  /* PrintForge premium maker palette */
-  --background: #f6f0e6;
-  --foreground: #101827;
-  --card: #fffdf8;
-  --card-foreground: #101827;
-  --popover: #fffdf8;
-  --popover-foreground: #101827;
-  --primary: #c65d2e;
-  --primary-foreground: #fffdf8;
-  --secondary: #e9ddc8;
-  --secondary-foreground: #101827;
-  --muted: #d7d0c5;
-  --muted-foreground: #526174;
-  --accent: #0f766e;
-  --accent-foreground: #fffdf8;
-  --destructive: #c65d2e;
+  /* PrintForge electric maker palette */
+  --background: #f7f8fa;
+  --foreground: #1c1f26;
+  --card: #ffffff;
+  --card-foreground: #1c1f26;
+  --popover: #ffffff;
+  --popover-foreground: #1c1f26;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #e8ebf0;
+  --secondary-foreground: #1c1f26;
+  --muted: #e8ebf0;
+  --muted-foreground: #1c1f26;
+  --accent: #22d3ee;
+  --accent-foreground: #1c1f26;
+  --destructive: #b42318;
   --success: #18794e;
-  --border: #d7d0c5;
-  --input: #526174;
-  --ring: #0f766e;
-  --chart-1: #c65d2e;
-  --chart-2: #0f766e;
-  --chart-3: #101827;
-  --chart-4: #526174;
-  --chart-5: #e9ddc8;
+  --border: #8a93a3;
+  --input: #8a93a3;
+  --ring: #3b82f6;
+  --chart-1: #3b82f6;
+  --chart-2: #22d3ee;
+  --chart-3: #1c1f26;
+  --chart-4: #8a93a3;
+  --chart-5: #f7f8fa;
   --radius: 0.75rem;
-  --sidebar: #243041;
-  --sidebar-foreground: #fffdf8;
-  --sidebar-primary: #c65d2e;
-  --sidebar-primary-foreground: #fffdf8;
-  --sidebar-accent: #0f766e;
-  --sidebar-accent-foreground: #fffdf8;
-  --sidebar-border: #526174;
-  --sidebar-ring: #0f766e;
+  --sidebar: #1c1f26;
+  --sidebar-foreground: #f7f8fa;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #22d3ee;
+  --sidebar-accent-foreground: #1c1f26;
+  --sidebar-border: #8a93a3;
+  --sidebar-ring: #3b82f6;
 }
 
 @layer base {
@@ -90,10 +90,13 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply bg-background;
+    @apply h-full w-full bg-background;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply min-h-full w-full overflow-x-hidden bg-background text-foreground font-sans;
+  }
+  main {
+    @apply w-full;
   }
 }
 

@@ -28,7 +28,7 @@ export function Navbar() {
   const closeMenus = () => { setMobileOpen(false); setProductsOpen(false) }
 
   return (
-    <header className={`z-50 border-b border-border bg-background/95 backdrop-blur-sm ${isHome ? 'relative' : 'relative'}`}>
+    <header className={`z-50 border-b border-border bg-foreground backdrop-blur-sm ${isHome ? 'relative' : 'relative'}`}>
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="PrintForge home">
           <span className="flex size-8 items-center justify-center rounded-md bg-primary"><Box className="size-4.5 text-primary-foreground" aria-hidden /></span>
@@ -36,17 +36,17 @@ export function Navbar() {
         </Link>
 
         <nav className="mx-auto hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Main navigation">
-          <Link href="/" className="rounded-md px-3 py-2 text-sm font-bold text-foreground hover:bg-muted">Home</Link>
+          <Link href="/" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Home</Link>
           <div className="relative" onMouseLeave={() => setProductsOpen(false)}>
-            <button type="button" onClick={() => setProductsOpen((open) => !open)} aria-expanded={productsOpen} className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-bold text-foreground hover:bg-muted">
+            <button type="button" onClick={() => setProductsOpen((open) => !open)} aria-expanded={productsOpen} className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">
               Products <ChevronDown className="size-3.5" />
             </button>
             {productsOpen && <div className="absolute left-0 top-full z-50 mt-1 w-72 rounded-md border border-border bg-popover p-2 shadow-lg">
               {PRODUCTS.map((product) => <Link key={product.id} href={`/shop/${product.id}`} onClick={closeMenus} className="block rounded-md px-3 py-2.5 text-sm text-popover-foreground hover:bg-muted">{product.label}</Link>)}
             </div>}
           </div>
-          <Link href="/blog" className="rounded-md px-3 py-2 text-sm font-bold text-foreground hover:bg-muted">Blog</Link>
-          <Link href="/policies/contact" className="rounded-md px-3 py-2 text-sm font-bold text-foreground hover:bg-muted">Contact Us</Link>
+          <Link href="/blog" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Blog</Link>
+          <Link href="/policies/contact" className="rounded-md px-3 py-2 text-sm font-bold text-background hover:bg-muted">Contact Us</Link>
           {user && user.role !== 'CUSTOMER' && <Link href="/admin" className="rounded-md px-3 py-2 text-sm font-medium text-primary hover:bg-muted">Admin</Link>}
         </nav>
 
@@ -54,7 +54,7 @@ export function Navbar() {
           <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Wishlist" />}><Heart className="size-4.5" /></Button>
           <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />}><Search className="size-4.5" /></Button>
           <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />}><User className="size-4.5" /></Button>
-          {user && <Button variant="ghost" size="sm" onClick={() => signOut()} className="hidden text-xs font-medium text-muted-foreground hover:text-foreground lg:inline-flex">Sign out</Button>}
+          {user && <Button variant="ghost" size="sm" onClick={() => signOut()} className="hidden text-xs font-medium text-muted-foreground hover:text-background lg:inline-flex">Sign out</Button>}
           <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
         </div>
