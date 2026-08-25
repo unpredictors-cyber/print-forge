@@ -29,7 +29,7 @@ export default function HomePage() {
   const advance = (direction: number) => setSlide((slide + direction + slides.length) % slides.length)
 
   return (
-    <main className="w-full min-h-screen bg-background">
+    <main className="w-full min-h-screen overflow-x-hidden bg-background">
       <section className="w-full pt-0">
         <div className="relative w-full overflow-hidden rounded-none bg-card shadow-sm lg:rounded-b-2xl">
           <div key={slide} className="grid min-h-[360px] items-stretch md:grid-cols-[.9fr_1.1fr] lg:min-h-[370px]" aria-live="polite">
@@ -50,7 +50,7 @@ export default function HomePage() {
       <ProductRail title="Best Selling Products" eyebrow="PrintForge picks" products={products.slice(0, 5)} />
       <ProductRail title="New Arrivals" eyebrow="Just landed" products={products.slice(3, 8)} />
       <ProductRail title="Hot Deals" eyebrow="Limited time" products={products.slice().reverse().slice(0, 5)} accent />
-      <section className="w-full px-4 py-16 sm:px-6 lg:px-10"><div className="grid gap-4 rounded-2xl bg-primary p-6 text-primary-foreground sm:grid-cols-[1fr_auto] sm:items-center sm:p-10"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-primary-foreground/70">For businesses & makers</p><h2 className="mt-2 text-2xl font-black">Need more than one?</h2><p className="mt-2 text-sm text-primary-foreground/80">Get dedicated pricing and support for bulk orders, custom printing, and workshop setups.</p></div><Link href="/policies/bulk-enquiry" className="inline-flex items-center justify-center gap-2 rounded-md bg-card px-5 py-3 text-sm font-bold text-primary">Bulk enquiry <ArrowRight className="size-4" /></Link></div></section>
+      <section className="w-full px-4 py-16 sm:px-6 lg:px-10"><div className="grid gap-4 rounded-2xl border border-border bg-muted p-6 text-foreground shadow-sm sm:grid-cols-[1fr_auto] sm:items-center sm:p-10"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">For businesses & makers</p><h2 className="mt-2 text-2xl font-black text-foreground">Need more than one?</h2><p className="mt-2 text-sm text-muted-foreground">Get dedicated pricing and support for bulk orders, custom printing, and workshop setups.</p></div><Link href="/policies/bulk-enquiry" className="inline-flex items-center justify-center gap-2 rounded-md bg-foreground px-5 py-3 text-sm font-bold text-background transition-colors hover:bg-foreground/90">Bulk enquiry <ArrowRight className="size-4" /></Link></div></section>
     </main>
   )
 }

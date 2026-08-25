@@ -32,7 +32,7 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="PrintForge home">
           <span className="flex size-8 items-center justify-center rounded-md bg-accent"><Box className="size-4.5 text-primary-foreground" aria-hidden /></span>
-          <span className="text-lg font-semibold tracking-tight">PrintForge</span>
+          <span className="text-lg font-semibold tracking-tight text-background">PrintForge</span>
         </Link>
 
         <nav className="mx-auto hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Main navigation">
@@ -55,8 +55,8 @@ export function Navbar() {
           <Button variant="ghost" size="icon" render={<Link href="/shop" aria-label="Search products" />} className="text-background transition-colors hover:bg-transparent hover:text-accent focus-visible:ring-accent"><Search className="size-4.5" /></Button>
           <Button variant="ghost" size="icon" render={<Link href="/account" aria-label="Profile" />} className="text-background transition-colors hover:bg-transparent hover:text-accent focus-visible:ring-accent"><User className="size-4.5" /></Button>
           {user && <Button variant="ghost" size="sm" onClick={() => signOut()} className="hidden text-xs font-medium text-muted-foreground hover:text-background lg:inline-flex">Sign out</Button>}
-          <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
+          <Button variant="ghost" size="icon" onClick={openCart} aria-label={`Open cart, ${count} items`} className="relative text-background hover:bg-transparent hover:text-accent focus-visible:ring-accent"><ShoppingCart className="size-4.5" />{count > 0 && <span className="absolute -right-0.5 -top-0.5 flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</Button>
+          <Button variant="ghost" size="icon" className="text-background hover:bg-transparent hover:text-accent focus-visible:ring-accent md:hidden" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</Button>
         </div>
       </div>
 
