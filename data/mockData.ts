@@ -186,7 +186,7 @@ export const mockOrders: Order[] = [
       {
         product_id: 'prod-desk-organizer',
         product_name: 'Geometric Desk Organizer',
-        image: '/images/products/desk-organizer.png',
+        image: '',
         color: 'Navy',
         material: 'PLA',
         quantity: 1,
@@ -195,7 +195,7 @@ export const mockOrders: Order[] = [
       {
         product_id: 'prod-voronoi-planter',
         product_name: 'Voronoi Lattice Planter',
-        image: '/images/products/voronoi-planter.png',
+        image: '',
         color: 'White',
         material: 'PLA',
         quantity: 1,
@@ -213,7 +213,7 @@ export const mockOrders: Order[] = [
       {
         product_id: 'prod-chess-set',
         product_name: 'Modern Minimal Chess Set',
-        image: '/images/products/chess-set.png',
+        image: '',
         color: 'Navy',
         material: 'Resin',
         quantity: 1,
@@ -231,7 +231,7 @@ export const mockOrders: Order[] = [
       {
         product_id: 'prod-articulated-dragon',
         product_name: 'Articulated Dragon Figurine',
-        image: '/images/products/articulated-dragon.png',
+        image: '',
         color: 'Teal',
         material: 'PLA',
         quantity: 1,

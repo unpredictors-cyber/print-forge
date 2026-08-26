@@ -9,8 +9,8 @@ import { ProductCard } from '@/components/storefront/product-card'
 
 const slides = [
   { label: 'Made to order', title: 'Your idea, in your colour.', copy: 'Custom-coloured 3D printed products made to order, with designs ready to bring home.', image: '/images/hero-printer.png', cta: 'Shop ready-to-print products' },
-  { label: 'Creator favourite', title: 'Unique designs, made for you.', copy: 'Choose your colour and make it yours with distinctive products printed just for your space.', image: '/images/products/chess-set.png', cta: 'Explore best sellers' },
-  { label: 'Fast turnaround', title: 'More personality. Less waiting.', copy: 'Discover unique ready-to-print products with quick turnaround from order to dispatch.', image: '/images/products/litho-lamp.png', cta: 'See hot deals' },
+  { label: 'Creator favourite', title: 'Unique designs, made for you.', copy: 'Choose your colour and make it yours with distinctive products printed just for your space.', image: '/images/hero-printer.png', cta: 'Explore best sellers' },
+  { label: 'Fast turnaround', title: 'More personality. Less waiting.', copy: 'Discover unique ready-to-print products with quick turnaround from order to dispatch.', image: '/images/hero-printer.png', cta: 'See hot deals' },
 ]
 
 const trustItems: [string, typeof Truck][] = [
