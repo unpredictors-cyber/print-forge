@@ -2,11 +2,32 @@
 
 import { useState } from 'react'
 import { LockKeyhole } from 'lucide-react'
+import { FaApplePay, FaCcAmex, FaCcDiscover, FaCcMastercard, FaCcPaypal, FaCcVisa, FaGooglePay } from 'react-icons/fa'
 
 export const PAYMENT_METHODS = ['Visa', 'Mastercard', 'Amex', 'Discover', 'PayPal', 'Apple Pay', 'Google Pay'] as const
 
-function MethodMark({ name }: { name: string }) {
-  return <span className="font-mono text-[10px] font-bold tracking-tight">{name === 'Mastercard' ? 'MC' : name === 'American Express' ? 'AMEX' : name}</span>
+const PAYMENT_ICON_STYLES: Record<(typeof PAYMENT_METHODS)[number], string> = {
+  Visa: 'text-[#1A1F71]',
+  Mastercard: 'text-[#EB001B]',
+  Amex: 'text-[#2E77BC]',
+  Discover: 'text-[#FF6000]',
+  PayPal: 'text-[#003087]',
+  'Apple Pay': 'text-[#000000]',
+  'Google Pay': 'text-[#4285F4]',
+}
+
+function MethodMark({ name }: { name: (typeof PAYMENT_METHODS)[number] }) {
+  const icons = {
+    Visa: FaCcVisa,
+    Mastercard: FaCcMastercard,
+    Amex: FaCcAmex,
+    Discover: FaCcDiscover,
+    PayPal: FaCcPaypal,
+    'Apple Pay': FaApplePay,
+    'Google Pay': FaGooglePay,
+  }
+  const Icon = icons[name]
+  return <Icon aria-hidden="true" className={`text-3xl ${PAYMENT_ICON_STYLES[name]}`} />
 }
 
 export function PaymentMethodIcons({ selectable = false, value, onChange }: { selectable?: boolean; value?: string; onChange?: (value: (typeof PAYMENT_METHODS)[number]) => void }) {
