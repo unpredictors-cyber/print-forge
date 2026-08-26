@@ -12,10 +12,10 @@ import { formatDate, formatPrice } from '@/lib/utils'
 import { useToast } from '@/components/ui/toast'
 import type { OrderStatus, TicketType } from '@/lib/types'
 
-const statusVariant: Record<OrderStatus, 'default' | 'success' | 'warning' | 'info' | 'destructive'> = {
+const statusVariant: Record<OrderStatus, 'default' | 'success' | 'warning' | 'neutral' | 'destructive'> = {
   PENDING: 'default',
   IN_PRODUCTION: 'warning',
-  SHIPPED: 'info',
+  SHIPPED: 'neutral',
   DELIVERED: 'success',
   CANCELLED: 'destructive',
 }

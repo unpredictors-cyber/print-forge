@@ -35,7 +35,7 @@ export function WriteReviewModal({ open, onClose, productName }: WriteReviewModa
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <span className="text-sm font-medium text-foreground">Your rating</span>
-          <RatingStars rating={rating} interactive onChange={setRating} size={24} />
+          <RatingStars rating={rating} interactive onChange={setRating} size="lg" />
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="review-comment" className="text-sm font-medium text-foreground">

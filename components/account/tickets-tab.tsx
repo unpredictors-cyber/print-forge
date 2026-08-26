@@ -8,9 +8,9 @@ import { mockCurrentUser, mockTicketMessages, mockTickets } from '@/data/mockDat
 import { cn, formatDate } from '@/lib/utils'
 import type { TicketStatus } from '@/lib/types'
 
-const statusVariant: Record<TicketStatus, 'warning' | 'info' | 'success'> = {
+const statusVariant: Record<TicketStatus, 'warning' | 'success' | 'neutral'> = {
   OPEN: 'warning',
-  IN_PROGRESS: 'info',
+  IN_PROGRESS: 'neutral',
   RESOLVED: 'success',
 }
 

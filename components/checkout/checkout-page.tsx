@@ -22,7 +22,7 @@ export function CheckoutPage() {
   const { user } = useAuth()
   const { items, subtotal, clear } = useCart()
   const [showAuth, setShowAuth] = useState<'login' | 'register'>('login')
-  const [payment, setPayment] = useState(payments[0])
+  const [payment, setPayment] = useState<(typeof payments)[number]>(payments[0])
   const [shipping, setShipping] = useState('standard')
   const [placed, setPlaced] = useState(false)
   const shippingFee = shippingMethods.find((method) => method.id === shipping)?.price ?? 0
