@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useToast } from '@/components/ui/toast'
 import { PaymentMethodIcons } from '@/components/storefront/payment-methods'
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 
 const COLUMNS = [
   {
@@ -44,10 +45,10 @@ const COLUMNS = [
 ]
 
 const socials = [
-  { label: 'Facebook', href: 'https://www.facebook.com', mark: 'f' },
-  { label: 'Instagram', href: 'https://www.instagram.com', mark: '◎' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com', mark: 'in' },
-  { label: 'YouTube', href: 'https://www.youtube.com', mark: '▶' },
+  { label: 'Facebook', href: 'https://www.facebook.com', icon: FaFacebook, color: 'text-[#1877F2]' },
+  { label: 'Instagram', href: 'https://www.instagram.com', icon: FaInstagram, color: 'text-[#E4405F]' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com', icon: FaLinkedin, color: 'text-[#0A66C2]' },
+  { label: 'YouTube', href: 'https://www.youtube.com', icon: FaYoutube, color: 'text-[#FF0000]' },
 ]
 
 export function Footer() {
@@ -107,11 +108,14 @@ export function Footer() {
             <Link href="/" className="text-sm font-bold text-background">PrintForge</Link>
             <p className="text-center text-xs text-background/60">© 2026 PrintForge. All rights reserved.</p>
             <div className="flex items-center gap-2" aria-label="Social links">
-            {socials.map((social) => (
-              <Link key={social.label} href={social.href} aria-label={social.label} className="flex size-8 items-center justify-center rounded-full border border-background/20 bg-background/10 transition-colors hover:bg-background/20">
-                <span className="font-sans text-xs font-black leading-none tracking-tight text-background" aria-hidden="true">{social.mark}</span>
-              </Link>
-            ))}
+            {socials.map((social) => {
+              const Icon = social.icon
+              return (
+                <Link key={social.label} href={social.href} aria-label={social.label} className="flex size-8 items-center justify-center rounded-full border border-background/20 bg-background transition-colors hover:bg-background/90">
+                  <Icon aria-hidden="true" className={`text-base ${social.color}`} />
+                </Link>
+              )
+            })}
           </div>
         </div>
         </div>
