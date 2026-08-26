@@ -2,18 +2,11 @@
 
 import { useState } from 'react'
 import { LockKeyhole } from 'lucide-react'
-import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCcDiscover, FaCcPaypal, FaCcApplePay, FaGooglePay } from 'react-icons/fa'
 
 export const PAYMENT_METHODS = ['Visa', 'Mastercard', 'Amex', 'Discover', 'PayPal', 'Apple Pay', 'Google Pay'] as const
 
-const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Visa: FaCcVisa,
-  Mastercard: FaCcMastercard,
-  Amex: FaCcAmex,
-  Discover: FaCcDiscover,
-  PayPal: FaCcPaypal,
-  'Apple Pay': FaCcApplePay,
-  'Google Pay': FaGooglePay,
+function MethodMark({ name }: { name: string }) {
+  return <span className="font-mono text-[10px] font-bold tracking-tight">{name === 'Mastercard' ? 'MC' : name === 'American Express' ? 'AMEX' : name}</span>
 }
 
 export function PaymentMethodIcons({ selectable = false, value, onChange }: { selectable?: boolean; value?: string; onChange?: (value: string) => void }) {
@@ -23,17 +16,12 @@ export function PaymentMethodIcons({ selectable = false, value, onChange }: { se
     <div className="flex flex-wrap gap-2" aria-label="Payment methods">
       {PAYMENT_METHODS.map((method) => {
         const isActive = active === method
-        const Icon = ICONS[method]
-        const className = `flex h-7 items-center justify-center rounded-md border px-2 transition-colors ${selectable ? 'cursor-pointer hover:border-primary' : ''} ${isActive && selectable ? 'border-primary bg-primary/10' : 'border-border bg-background/60'}`
+        const className = `flex h-9 items-center justify-center rounded-md border px-2.5 text-[11px] font-semibold transition-colors ${selectable ? 'cursor-pointer hover:border-primary' : ''} ${isActive && selectable ? 'border-primary bg-primary/10 text-primary' : 'border-border bg-background/60 text-muted-foreground'}`
         return selectable ? (
-          <button key={method} type="button" className={className} aria-pressed={isActive} aria-label={method} onClick={() => { setSelected(method); onChange?.(method) }}>
-            {Icon && <Icon className="h-6 w-auto" />}
+          <button key={method} type="button" className={className} aria-pressed={isActive} onClick={() => { setSelected(method); onChange?.(method) }}>
+            <MethodMark name={method} />
           </button>
-        ) : (
-          <span key={method} className={className} aria-label={method}>
-            {Icon && <Icon className="h-6 w-auto" />}
-          </span>
-        )
+        ) : <span key={method} className={className}><MethodMark name={method} /></span>
       })}
     </div>
   )
