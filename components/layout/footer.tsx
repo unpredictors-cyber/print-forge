@@ -67,17 +67,17 @@ export function Footer() {
   }, [])
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-black text-white">
       <div className="mx-auto grid max-w-7xl gap-8 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:px-8">
         {COLUMNS.map((column) => (
           <nav key={column.heading} aria-label={column.heading}>
-            <h3 className="text-sm font-bold text-background sm:text-base">{column.heading}</h3>
+            <h3 className="text-sm font-bold text-white sm:text-base">{column.heading}</h3>
             {column.newsletter ? (
               <div className="mt-3 max-w-xs">
-                <p className="text-sm leading-5 text-background/70">Get first access to new designs, colour drops, and made-to-order offers.</p>
+                <p className="text-sm leading-5 text-white/70">Get first access to new designs, colour drops, and made-to-order offers.</p>
                 <form className="mt-4 flex" onSubmit={(event) => { event.preventDefault(); const form = event.currentTarget; if (!form.checkValidity()) return; toast('You are on the list', { description: 'Watch your inbox for PrintForge updates.' }); form.reset() }}>
                   <label htmlFor="footer-newsletter" className="sr-only">Email address</label>
-                  <input id="footer-newsletter" name="email" type="email" required placeholder="Email address" className="min-w-0 flex-1 rounded-l-md border border-background/20 bg-background/10 px-3 py-2 text-sm text-background outline-none placeholder:text-background/50 focus:border-background/60" />
+                  <input id="footer-newsletter" name="email" type="email" required placeholder="Email address" className="min-w-0 flex-1 rounded-l-md border border-background/20 bg-background/10 px-3 py-2 text-sm text-white outline-none placeholder:text-white/50 focus:border-background/60" />
                   <button type="submit" className="rounded-r-md bg-background px-3 py-2 text-sm font-semibold text-foreground hover:bg-background/90">Join</button>
                 </form>
               </div>
@@ -85,7 +85,7 @@ export function Footer() {
               <ul className="mt-3 space-y-2">
                 {column.links.map((link) => (
                   <li key={`${column.heading}-${link.label}`}>
-                    <Link href={link.href} className="text-sm leading-5 text-background/70 transition-colors hover:text-background">
+                    <Link href={link.href} className="text-sm leading-5 text-white/70 transition-colors hover:text-white">
                       {link.label}
                     </Link>
                   </li>
@@ -99,14 +99,14 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-5 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div ref={selectorRef} className="relative">
-              <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex items-center gap-2 rounded-md border border-background/20 bg-background/10 px-3 py-2 text-xs text-background hover:bg-background/20">{currency}<span aria-hidden="true">⌄</span></button>
-              {open && <div className="absolute bottom-full left-0 z-10 mb-2 w-56 rounded-lg border border-background/20 bg-foreground p-1 shadow-lg">{currencies.map((option) => <button key={option} type="button" onClick={() => { setCurrency(option); setOpen(false) }} className="block w-full rounded px-3 py-2 text-left text-xs text-background/80 hover:bg-background/10 hover:text-background">{option}</button>)}</div>}
+              <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex items-center gap-2 rounded-md border border-background/20 bg-background/10 px-3 py-2 text-xs text-white hover:bg-background/20">{currency}<span aria-hidden="true">⌄</span></button>
+              {open && <div className="absolute bottom-full left-0 z-10 mb-2 w-56 rounded-lg border border-background/20 bg-foreground p-1 shadow-lg">{currencies.map((option) => <button key={option} type="button" onClick={() => { setCurrency(option); setOpen(false) }} className="block w-full rounded px-3 py-2 text-left text-xs text-white/80 hover:bg-background/10 hover:text-white">{option}</button>)}</div>}
             </div>
             <PaymentMethodIcons />
           </div>
           <div className="flex flex-col items-center justify-between gap-4 border-t border-background/15 pt-4 sm:flex-row">
-            <Link href="/" className="text-sm font-bold text-background">PrintForge</Link>
-            <p className="text-center text-xs text-background/60">© 2026 PrintForge. All rights reserved.</p>
+            <Link href="/" className="text-sm font-bold text-white">PrintForge</Link>
+            <p className="text-center text-xs text-white/60">© 2026 PrintForge. All rights reserved.</p>
             <div className="flex items-center gap-2" aria-label="Social links">
             {socials.map((social) => {
               const Icon = social.icon

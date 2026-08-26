@@ -134,6 +134,7 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
                 variant="outline"
                 size="lg"
                 className="w-full"
+                nativeButton={false}
                 render={<Link href="/shop" />}
               >
                 Continue as guest
