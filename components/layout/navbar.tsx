@@ -24,11 +24,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
 
-  const isHome = pathname === '/'
   const closeMenus = () => { setMobileOpen(false); setProductsOpen(false) }
 
   return (
-    <header className={`z-50 border-b border-border bg-foreground backdrop-blur-sm ${isHome ? 'relative' : 'relative'}`}>
+    <header className="sticky top-0 z-50 border-b border-border bg-foreground backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="PrintForge home">
           <span className="flex size-8 items-center justify-center rounded-md bg-accent"><Box className="size-4.5 text-primary-foreground" aria-hidden /></span>
@@ -60,7 +59,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {mobileOpen && <div className="border-t border-border bg-background px-4 py-4 md:hidden"><nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+      {mobileOpen && <div className="border-t border-border bg-background px-4 py-4 md:hidden"><div className="mb-3 grid grid-cols-4 gap-2 border-b border-border pb-3" aria-label="Quick actions"><Link href="/account" onClick={closeMenus} aria-label="Open favourites" className="flex min-h-11 flex-col items-center justify-center gap-1 rounded-md text-xs font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"><Heart className="size-5" aria-hidden />Favourites</Link><Link href="/shop" onClick={closeMenus} aria-label="Search products" className="flex min-h-11 flex-col items-center justify-center gap-1 rounded-md text-xs font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"><Search className="size-5" aria-hidden />Search</Link><Link href="/account" onClick={closeMenus} aria-label="Open profile" className="flex min-h-11 flex-col items-center justify-center gap-1 rounded-md text-xs font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"><User className="size-5" aria-hidden />Profile</Link><button type="button" onClick={() => { openCart(); closeMenus() }} aria-label={`Open cart, ${count} items`} className="relative flex min-h-11 flex-col items-center justify-center gap-1 rounded-md text-xs font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"><ShoppingCart className="size-5" aria-hidden />Cart{count > 0 && <span className="absolute right-3 top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{count}</span>}</button></div><nav className="flex flex-col gap-1" aria-label="Mobile navigation">
         <Link href="/" onClick={closeMenus} className="rounded-md px-3 py-2.5 text-sm font-medium hover:bg-muted">Home</Link>
         <button type="button" onClick={() => setProductsOpen((open) => !open)} className="flex items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium hover:bg-muted">Products <ChevronDown className="size-4" /></button>
         {productsOpen && <div className="ml-3 border-l border-border pl-3">{PRODUCTS.map((product) => <Link key={product.id} href={`/shop/${product.id}`} onClick={closeMenus} className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted">{product.label}</Link>)}</div>}
