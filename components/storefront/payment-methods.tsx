@@ -37,7 +37,7 @@ export function PaymentMethodIcons({ selectable = false, value, onChange }: { se
     <div className="flex flex-wrap gap-2" aria-label="Payment methods">
       {PAYMENT_METHODS.map((method) => {
         const isActive = active === method
-        const className = `flex h-9 items-center justify-center rounded-md border px-2.5 text-[11px] font-semibold transition-colors ${selectable ? 'cursor-pointer hover:border-accent' : ''} ${isActive && selectable ? 'border-accent bg-accent/10 text-foreground' : 'border-border bg-background/60 text-muted-foreground'}`
+        const className = `flex h-9 items-center justify-center rounded-md border px-2.5 text-[11px] font-semibold transition-colors ${selectable ? 'cursor-pointer hover:border-accent' : ''} ${isActive && selectable ? 'border-accent bg-white text-foreground' : 'border-border bg-white text-muted-foreground'}`
         return selectable ? (
           <button key={method} type="button" className={className} aria-pressed={isActive} onClick={() => { setSelected(method); onChange?.(method) }}>
             <MethodMark name={method} />
