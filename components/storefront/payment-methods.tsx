@@ -9,7 +9,7 @@ function MethodMark({ name }: { name: string }) {
   return <span className="font-mono text-[10px] font-bold tracking-tight">{name === 'Mastercard' ? 'MC' : name === 'American Express' ? 'AMEX' : name}</span>
 }
 
-export function PaymentMethodIcons({ selectable = false, value, onChange }: { selectable?: boolean; value?: string; onChange?: (value: string) => void }) {
+export function PaymentMethodIcons({ selectable = false, value, onChange }: { selectable?: boolean; value?: string; onChange?: (value: (typeof PAYMENT_METHODS)[number]) => void }) {
   const [selected, setSelected] = useState(value ?? PAYMENT_METHODS[0])
   const active = value ?? selected
   return (

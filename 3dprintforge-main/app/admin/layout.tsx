@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, [isLoading, router, user])
 
   const visibleLinks = useMemo(
-    () => links.filter(([, href, , scope]) => master || href === '/admin' || user?.scopes?.includes(scope)),
+    () => links.filter(([, href, , scope]) => master || href === '/admin' || (scope !== 'all' && user?.scopes?.includes(scope as any))),
     [master, user],
   )
 

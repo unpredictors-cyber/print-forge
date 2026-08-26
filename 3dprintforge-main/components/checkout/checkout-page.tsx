@@ -11,7 +11,7 @@ import { useAuth } from '@/lib/auth-context'
 import { useCart } from '@/lib/cart-context'
 import { formatPrice } from '@/lib/utils'
 
-const payments = ['UPI / PhonePe / GPay', 'Credit / Debit Card', 'Netbanking', 'Cash on Delivery']
+const payments = ['UPI / PhonePe / GPay', 'Credit / Debit Card', 'Netbanking', 'Cash on Delivery'] as const
 const shippingMethods = [
   { id: 'standard', name: 'Standard delivery', detail: '3–7 business days', price: 0 },
   { id: 'express', name: 'Express delivery', detail: '1–2 business days', price: 149 },
@@ -21,7 +21,7 @@ export function CheckoutPage() {
   const { user } = useAuth()
   const { items, subtotal, clear } = useCart()
   const [showAuth, setShowAuth] = useState<'login' | 'register'>('login')
-  const [payment, setPayment] = useState(payments[0])
+  const [payment, setPayment] = useState<(typeof payments)[number]>(payments[0])
   const [shipping, setShipping] = useState('standard')
   const [placed, setPlaced] = useState(false)
   const shippingFee = shippingMethods.find((method) => method.id === shipping)?.price ?? 0

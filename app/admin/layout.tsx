@@ -8,12 +8,12 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 
 const links = [
-  ['Overview', '/admin', BarChart3, 'all'],
-  ['Products', '/admin/products', Box, 'inventory'],
-  ['Reviews', '/admin/reviews', Star, 'all'],
-  ['Support', '/admin/support', MessageSquare, 'orders'],
-  ['Team', '/admin/team', Users, 'all'],
-  ['Blog CMS', '/admin/blog', FileText, 'all'],
+  ['Overview', '/admin', BarChart3, 'analytics'],
+  ['Products', '/admin/products', Box, 'products'],
+  ['Reviews', '/admin/reviews', Star, 'reviews'],
+  ['Support', '/admin/support', MessageSquare, 'support'],
+  ['Team', '/admin/team', Users, 'team'],
+  ['Blog CMS', '/admin/blog', FileText, 'blog'],
 ] as const
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
