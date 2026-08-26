@@ -63,7 +63,7 @@ export function CartDrawer() {
           <div className="flex flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
             <ShoppingCart className="size-10 text-muted-foreground/40" aria-hidden />
             <p className="text-sm text-muted-foreground">Your cart is empty.</p>
-            <Button variant="outline" onClick={closeCart} render={<Link href="/shop" />}>
+            <Button variant="outline" onClick={closeCart} nativeButton={false} render={<Link href="/shop" />}>
               Browse products
             </Button>
           </div>
@@ -133,7 +133,7 @@ export function CartDrawer() {
               <p className="mb-4 text-xs text-muted-foreground">
                 Shipping and taxes calculated at checkout.
               </p>
-              <Button size="lg" className="w-full" onClick={closeCart} render={<Link href="/checkout" />}>Checkout</Button>
+              <Button size="lg" className="w-full" onClick={closeCart} nativeButton={false} render={<Link href="/checkout" />}>Checkout</Button>
             </div>
           </>
         )}
