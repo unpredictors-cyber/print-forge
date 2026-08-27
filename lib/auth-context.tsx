@@ -1,46 +1,51 @@
 'use client'
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import type { Profile } from '@/lib/types'
-
-export type DemoRole = 'MASTER_ADMIN' | 'ADMIN' | 'CUSTOMER'
-type StoredUser = Profile & { password: string }
-
-const DEMO_USERS: StoredUser[] = [
-  { id: 'user-master', email: 'master@example.com', full_name: 'Master Admin', role: 'MASTER_ADMIN', scopes: ['analytics', 'products', 'reviews', 'support', 'team', 'blog'], phone: '', address: '', created_at: '2026-01-01', password: 'master123' },
-  { id: 'user-staff', email: 'staff@example.com', full_name: 'Staff Admin', role: 'ADMIN', scopes: ['products', 'support'], phone: '', address: '', created_at: '2026-01-01', password: 'staff123' },
-  { id: 'user-1', email: 'user@example.com', full_name: 'Demo Customer', role: 'CUSTOMER', scopes: [], phone: '+1 (555) 014-2024', address: '42 Market Street, Portland, OR', created_at: '2026-01-01', password: 'user123' },
-]
-
-const USERS_KEY = 'printforge-demo-users'
-const SESSION_KEY = 'printforge-demo-user'
-const REMEMBER_KEY = 'printforge-demo-user-remember'
+import type { Profile, Role } from '@/lib/types'
+import { createClient } from '@/lib/supabase/client'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 type AuthResult = { ok: boolean; message: string }
 
 type AuthContextValue = {
   user: Profile | null
   isLoading: boolean
-  signIn: (email: string, password: string, remember?: boolean) => AuthResult
-  signUp: (name: string, email: string, password: string) => AuthResult
-  signOut: () => void
+  signIn: (email: string, password: string, remember?: boolean) => Promise<AuthResult>
+  signUp: (name: string, email: string, password: string) => Promise<AuthResult>
+  signOut: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
-function withoutPassword(user: StoredUser): Profile {
-  const { password: _password, ...profile } = user
-  return profile
+let supabase: SupabaseClient | null = null
+function getClient() {
+  if (!supabase) supabase = createClient()
+  return supabase
 }
 
-function persistUser(user: Profile, remember: boolean) {
-  const payload = JSON.stringify(user)
-  if (remember) {
-    window.localStorage.setItem(REMEMBER_KEY, payload)
-    window.sessionStorage.removeItem(SESSION_KEY)
-  } else {
-    window.sessionStorage.setItem(SESSION_KEY, payload)
-    window.localStorage.removeItem(REMEMBER_KEY)
+function normalizeRole(role: string | null | undefined): Role {
+  const r = (role ?? 'customer').toUpperCase()
+  if (r === 'ADMIN' || r === 'MASTER_ADMIN') return r
+  return 'CUSTOMER'
+}
+
+async function fetchProfile(userId: string): Promise<Profile | null> {
+  const client = getClient()
+  const { data } = await client
+    .from('profiles')
+    .select('id, email, full_name, role, scopes, phone, address, created_at')
+    .eq('id', userId)
+    .maybeSingle()
+  if (!data) return null
+  return {
+    id: data.id,
+    email: data.email ?? '',
+    full_name: data.full_name ?? '',
+    role: normalizeRole(data.role),
+    scopes: (data.scopes as Profile['scopes']) ?? [],
+    phone: data.phone ?? null,
+    address: data.address ? JSON.stringify(data.address) : null,
+    created_at: data.created_at ?? '',
   }
 }
 
@@ -49,53 +54,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    try {
-      const remembered = window.localStorage.getItem(REMEMBER_KEY)
-      if (remembered) {
-        setUser(JSON.parse(remembered))
-      } else {
-        const saved = window.sessionStorage.getItem(SESSION_KEY)
-        if (saved) setUser(JSON.parse(saved))
+    const client = getClient()
+
+    async function init() {
+      const { data: { session } } = await client.auth.getSession()
+      if (session?.user) {
+        const profile = await fetchProfile(session.user.id)
+        if (profile) setUser(profile)
       }
-    } catch {}
-    setIsLoading(false)
+      setIsLoading(false)
+    }
+    init()
+
+    const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
+      (async () => {
+        if (session?.user) {
+          const profile = await fetchProfile(session.user.id)
+          setUser(profile)
+        } else {
+          setUser(null)
+        }
+      })()
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
-  function getUsers(): StoredUser[] {
-    try {
-      const saved = window.localStorage.getItem(USERS_KEY)
-      return saved ? [...DEMO_USERS, ...JSON.parse(saved)] : DEMO_USERS
-    } catch {
-      return DEMO_USERS
-    }
-  }
-
-  function signIn(email: string, password: string, remember = false): AuthResult {
-    const found = getUsers().find((candidate) => candidate.email === email.trim().toLowerCase() && candidate.password === password)
-    if (!found) return { ok: false, message: 'Incorrect email or password. Please try again.' }
-    const next = withoutPassword(found)
-    setUser(next)
-    persistUser(next, remember)
+  async function signIn(email: string, password: string, _remember = false): Promise<AuthResult> {
+    const client = getClient()
+    const { error } = await client.auth.signInWithPassword({ email: email.trim().toLowerCase(), password })
+    if (error) return { ok: false, message: 'Incorrect email or password. Please try again.' }
     return { ok: true, message: 'Signed in successfully.' }
   }
 
-  function signUp(name: string, email: string, password: string): AuthResult {
-    const normalizedEmail = email.trim().toLowerCase()
-    if (!name.trim() || !normalizedEmail || password.length < 8) return { ok: false, message: 'Enter a name, valid email, and password of at least 8 characters.' }
-    if (getUsers().some((candidate) => candidate.email === normalizedEmail)) return { ok: false, message: 'An account with this email already exists — sign in instead.' }
-    const created: StoredUser = { id: `user-${Date.now()}`, email: normalizedEmail, full_name: name.trim(), role: 'CUSTOMER', scopes: [], phone: '', address: '', created_at: new Date().toISOString(), password }
-    const customUsers = (() => { try { return JSON.parse(window.localStorage.getItem(USERS_KEY) || '[]') as StoredUser[] } catch { return [] } })()
-    window.localStorage.setItem(USERS_KEY, JSON.stringify([...customUsers, created]))
-    const next = withoutPassword(created)
-    setUser(next)
-    persistUser(next, false)
+  async function signUp(name: string, email: string, password: string): Promise<AuthResult> {
+    const client = getClient()
+    const { data, error } = await client.auth.signUp({ email: email.trim().toLowerCase(), password })
+    if (error) {
+      if (error.message.toLowerCase().includes('already')) {
+        return { ok: false, message: 'An account with this email already exists — sign in instead.' }
+      }
+      return { ok: false, message: error.message }
+    }
+    if (data.user) {
+      await client.from('profiles').upsert({
+        id: data.user.id,
+        email: email.trim().toLowerCase(),
+        full_name: name.trim(),
+        role: 'customer',
+        scopes: [],
+      })
+    }
     return { ok: true, message: 'Account created successfully.' }
   }
 
-  function signOut() {
+  async function signOut(): Promise<void> {
+    const client = getClient()
+    await client.auth.signOut()
     setUser(null)
-    window.sessionStorage.removeItem(SESSION_KEY)
-    window.localStorage.removeItem(REMEMBER_KEY)
   }
 
   const value = useMemo(() => ({ user, isLoading, signIn, signUp, signOut }), [user, isLoading])

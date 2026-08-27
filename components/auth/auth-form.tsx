@@ -126,7 +126,7 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
     await new Promise((r) => setTimeout(r, 450))
 
     if (isLogin) {
-      const result = signIn(values.email, values.password, values.remember)
+      const result = await signIn(values.email, values.password, values.remember)
       if (!result.ok) {
         const attempts = failedAttempts + 1
         setFailedAttempts(attempts)
@@ -139,11 +139,11 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
         return
       }
       toast('Welcome back!', { variant: 'success' })
-      router.push(redirectTarget ?? (values.email.includes('example.com') && values.email !== 'user@example.com' ? '/admin' : '/account'))
+      router.push(redirectTarget ?? '/account')
       return
     }
 
-    const result = signUp(values.name, values.email, values.password)
+    const result = await signUp(values.name, values.email, values.password)
     if (!result.ok) {
       setFormError(result.message)
       setLoading(false)

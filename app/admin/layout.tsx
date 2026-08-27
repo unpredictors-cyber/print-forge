@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     if (!isLoading && (!user || (user.role !== 'MASTER_ADMIN' && user.role !== 'ADMIN'))) {
-      router.replace('/login?redirect=/admin')
+      router.replace('/')
     }
   }, [isLoading, router, user])
 
@@ -53,7 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
         <div className="mt-auto space-y-2 pt-10">
           <Link href="/" className="flex items-center gap-2 px-3 text-sm font-medium text-muted-foreground hover:text-primary"><ArrowLeft className="size-4" />Back to storefront</Link>
-          <button type="button" onClick={() => { signOut(); router.replace('/login') }} className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">Sign out</button>
+          <button type="button" onClick={async () => { await signOut(); router.replace('/') }} className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">Sign out</button>
         </div>
       </aside>
 
@@ -62,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">PrintForge</p><p className="text-sm font-semibold">Admin workspace</p></div>
           <button type="button" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? 'Close admin menu' : 'Open admin menu'} className="rounded-md p-2 hover:bg-muted">{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</button>
         </div>
-        {mobileOpen && <nav className="border-b border-border bg-card p-3 md:hidden" aria-label="Mobile admin navigation">{visibleLinks.map(([label, href, Icon]) => <Link key={href} href={href} onClick={closeMobile} className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium ${pathname === href ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}><Icon className="size-4" />{label}</Link>)}<Link href="/" onClick={closeMobile} className="mt-2 flex items-center gap-2 border-t border-border px-3 pt-3 text-sm text-muted-foreground"><ArrowLeft className="size-4" />Back to storefront</Link><button type="button" onClick={() => { signOut(); closeMobile(); router.replace('/login') }} className="w-full rounded-md px-3 py-2.5 text-left text-sm text-muted-foreground hover:bg-muted">Sign out</button></nav>}
+        {mobileOpen && <nav className="border-b border-border bg-card p-3 md:hidden" aria-label="Mobile admin navigation">{visibleLinks.map(([label, href, Icon]) => <Link key={href} href={href} onClick={closeMobile} className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium ${pathname === href ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}><Icon className="size-4" />{label}</Link>)}<Link href="/" onClick={closeMobile} className="mt-2 flex items-center gap-2 border-t border-border px-3 pt-3 text-sm text-muted-foreground"><ArrowLeft className="size-4" />Back to storefront</Link><button type="button" onClick={async () => { await signOut(); closeMobile(); router.replace('/') }} className="w-full rounded-md px-3 py-2.5 text-left text-sm text-muted-foreground hover:bg-muted">Sign out</button></nav>}
         <main className="min-w-0 p-4 sm:p-6 lg:p-10">{children}</main>
       </div>
     </div>
