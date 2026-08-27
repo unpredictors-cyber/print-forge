@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { Profile, Role } from '@/lib/types'
 import { createClient } from '@/lib/supabase/client'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import { isValidEmail } from '@/lib/validation'
 
 type AuthResult = { ok: boolean; message: string }
 
@@ -81,6 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   async function signIn(email: string, password: string, _remember = false): Promise<AuthResult> {
+    if (!isValidEmail(email)) return { ok: false, message: 'Enter a valid email address.' }
     const client = getClient()
     const { error } = await client.auth.signInWithPassword({ email: email.trim().toLowerCase(), password })
     if (error) return { ok: false, message: 'Incorrect email or password. Please try again.' }
@@ -88,6 +90,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function signUp(name: string, email: string, password: string): Promise<AuthResult> {
+    if (!isValidEmail(email)) return { ok: false, message: 'Enter a valid email address.' }
     const client = getClient()
     const { data, error } = await client.auth.signUp({ email: email.trim().toLowerCase(), password })
     if (error) {
