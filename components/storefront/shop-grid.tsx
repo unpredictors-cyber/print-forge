@@ -24,7 +24,7 @@ export function ShopGrid({ products: catalogProducts, reviews }: { products: Pro
         if (sort === 'price-high') return b.price - a.price
         return catalogProducts.indexOf(a) - catalogProducts.indexOf(b)
       })
-  }, [search, category, sort])
+  }, [catalogProducts, search, category, sort])
 
   return (
     <div className="flex flex-col gap-8 lg:flex-row">
@@ -49,7 +49,7 @@ export function ShopGrid({ products: catalogProducts, reviews }: { products: Pro
           <label className="sm:w-52"><span className="sr-only">Sort products</span><select value={sort} onChange={(event) => setSort(event.target.value)} className="h-11 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"><option value="newest">Newest</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label>
         </div>
         <p className="mb-4 text-sm text-muted-foreground" aria-live="polite">{products.length} product{products.length === 1 ? '' : 's'}{search ? ` matching “${search}”` : ''}</p>
-        {products.length === 0 ? <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center"><p className="font-bold">No products found</p><p className="mt-1 text-sm text-muted-foreground">Try another name or category.</p></div> : <div className="stagger-children grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">{products.map((product) => <ProductCard key={product.id} product={product} reviews={mockReviews} />)}</div>}
+        {products.length === 0 ? <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center"><p className="font-bold">No products found</p><p className="mt-1 text-sm text-muted-foreground">Try another name or category.</p></div> : <div className="stagger-children grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">{products.map((product) => <ProductCard key={product.id} product={product} reviews={reviews.filter((review) => review.product_id === product.id)} />)}</div>}
       </div>
     </div>
   )
