@@ -14,12 +14,15 @@ const DEMO_USERS: StoredUser[] = [
 
 const USERS_KEY = 'printforge-demo-users'
 const SESSION_KEY = 'printforge-demo-user'
+const REMEMBER_KEY = 'printforge-demo-user-remember'
+
+type AuthResult = { ok: boolean; message: string }
 
 type AuthContextValue = {
   user: Profile | null
   isLoading: boolean
-  signIn: (email: string, password: string) => { ok: boolean; message: string }
-  signUp: (name: string, email: string, password: string) => { ok: boolean; message: string }
+  signIn: (email: string, password: string, remember?: boolean) => AuthResult
+  signUp: (name: string, email: string, password: string) => AuthResult
   signOut: () => void
 }
 
@@ -30,14 +33,30 @@ function withoutPassword(user: StoredUser): Profile {
   return profile
 }
 
+function persistUser(user: Profile, remember: boolean) {
+  const payload = JSON.stringify(user)
+  if (remember) {
+    window.localStorage.setItem(REMEMBER_KEY, payload)
+    window.sessionStorage.removeItem(SESSION_KEY)
+  } else {
+    window.sessionStorage.setItem(SESSION_KEY, payload)
+    window.localStorage.removeItem(REMEMBER_KEY)
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     try {
-      const saved = window.sessionStorage.getItem(SESSION_KEY)
-      if (saved) setUser(JSON.parse(saved))
+      const remembered = window.localStorage.getItem(REMEMBER_KEY)
+      if (remembered) {
+        setUser(JSON.parse(remembered))
+      } else {
+        const saved = window.sessionStorage.getItem(SESSION_KEY)
+        if (saved) setUser(JSON.parse(saved))
+      }
     } catch {}
     setIsLoading(false)
   }, [])
@@ -51,31 +70,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  function signIn(email: string, password: string) {
+  function signIn(email: string, password: string, remember = false): AuthResult {
     const found = getUsers().find((candidate) => candidate.email === email.trim().toLowerCase() && candidate.password === password)
-    if (!found) return { ok: false, message: 'Invalid email or password.' }
+    if (!found) return { ok: false, message: 'Incorrect email or password. Please try again.' }
     const next = withoutPassword(found)
     setUser(next)
-    window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(next))
+    persistUser(next, remember)
     return { ok: true, message: 'Signed in successfully.' }
   }
 
-  function signUp(name: string, email: string, password: string) {
+  function signUp(name: string, email: string, password: string): AuthResult {
     const normalizedEmail = email.trim().toLowerCase()
     if (!name.trim() || !normalizedEmail || password.length < 8) return { ok: false, message: 'Enter a name, valid email, and password of at least 8 characters.' }
-    if (getUsers().some((candidate) => candidate.email === normalizedEmail)) return { ok: false, message: 'An account with that email already exists.' }
+    if (getUsers().some((candidate) => candidate.email === normalizedEmail)) return { ok: false, message: 'An account with this email already exists — sign in instead.' }
     const created: StoredUser = { id: `user-${Date.now()}`, email: normalizedEmail, full_name: name.trim(), role: 'CUSTOMER', scopes: [], phone: '', address: '', created_at: new Date().toISOString(), password }
     const customUsers = (() => { try { return JSON.parse(window.localStorage.getItem(USERS_KEY) || '[]') as StoredUser[] } catch { return [] } })()
     window.localStorage.setItem(USERS_KEY, JSON.stringify([...customUsers, created]))
     const next = withoutPassword(created)
     setUser(next)
-    window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(next))
+    persistUser(next, false)
     return { ok: true, message: 'Account created successfully.' }
   }
 
   function signOut() {
     setUser(null)
     window.sessionStorage.removeItem(SESSION_KEY)
+    window.localStorage.removeItem(REMEMBER_KEY)
   }
 
   const value = useMemo(() => ({ user, isLoading, signIn, signUp, signOut }), [user, isLoading])
@@ -87,10 +107,3 @@ export function useAuth() {
   if (!value) throw new Error('useAuth must be used inside AuthProvider')
   return value
 }
-
-export const DEMO_CREDENTIALS = [
-  ['master@example.com', 'master123', 'Master Admin'],
-  ['staff@example.com', 'staff123', 'Staff Admin'],
-  ['user@example.com', 'user123', 'Customer'],
-] as const
-
