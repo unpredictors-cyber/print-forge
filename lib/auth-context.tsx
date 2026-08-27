@@ -99,15 +99,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       return { ok: false, message: error.message }
     }
-    if (data.user) {
-      await client.from('profiles').upsert({
-        id: data.user.id,
+    if (!data.user) return { ok: false, message: 'We could not create your account. Please try again.' }
+
+    // When email confirmation is disabled, Supabase returns a session immediately.
+    // Keep this fallback for projects that return a user without an active session.
+    if (!data.session) {
+      const { error: signInError } = await client.auth.signInWithPassword({
         email: email.trim().toLowerCase(),
-        full_name: name.trim(),
-        role: 'customer',
-        scopes: [],
+        password,
       })
+      if (signInError) {
+        return { ok: false, message: 'Account created, but sign-in is not available yet. Please check the Supabase email confirmation setting.' }
+      }
     }
+
+    await client.from('profiles').upsert({
+      id: data.user.id,
+      email: email.trim().toLowerCase(),
+      full_name: name.trim(),
+      role: 'customer',
+      scopes: [],
+    })
+
     return { ok: true, message: 'Account created successfully.' }
   }
 

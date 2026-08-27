@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 
 import { ShopGrid } from '@/components/storefront/shop-grid'
 import { Skeleton } from '@/components/ui/skeleton'
+import { getPublicCatalog } from '@/lib/catalog'
 
 export const metadata: Metadata = {
   title: 'Shop',
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
     'Browse our full catalog of custom 3D printed products. Filter by category and customize color and material.',
 }
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const { products, reviews } = await getPublicCatalog()
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8">
@@ -28,7 +31,7 @@ export default function ShopPage() {
           </div>
         }
       >
-        <ShopGrid />
+        <ShopGrid products={products} reviews={reviews} />
       </Suspense>
     </div>
   )

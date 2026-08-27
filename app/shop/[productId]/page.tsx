@@ -6,7 +6,7 @@ import { ProductConfigurator } from '@/components/storefront/product-configurato
 import { ProductGallery } from '@/components/storefront/product-gallery'
 import { RelatedProducts } from '@/components/storefront/related-products'
 import { ReviewSection } from '@/components/storefront/review-section'
-import { mockProducts, mockReviews } from '@/data/mockData'
+import { getPublicCatalog } from '@/lib/catalog'
 
 export async function generateMetadata({
   params,
@@ -14,7 +14,8 @@ export async function generateMetadata({
   params: Promise<{ productId: string }>
 }): Promise<Metadata> {
   const { productId } = await params
-  const product = mockProducts.find((p) => p.id === productId)
+  const { products } = await getPublicCatalog()
+  const product = products.find((p) => p.id === productId)
   if (!product) return { title: 'Product not found' }
   return {
     title: product.name,
@@ -28,10 +29,11 @@ export default async function ProductPage({
   params: Promise<{ productId: string }>
 }) {
   const { productId } = await params
-  const product = mockProducts.find((p) => p.id === productId && p.is_published)
+  const { products, reviews } = await getPublicCatalog()
+  const product = products.find((p) => p.id === productId && p.is_published)
   if (!product) notFound()
 
-  const productReviews = mockReviews.filter((r) => r.product_id === product.id)
+  const productReviews = reviews.filter((r) => r.product_id === product.id)
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -59,8 +61,8 @@ export default async function ProductPage({
       <ReviewSection reviews={productReviews} />
       <RelatedProducts
         currentProduct={product}
-        allProducts={mockProducts}
-        reviews={mockReviews}
+        allProducts={products}
+        reviews={reviews}
       />
     </div>
   )
