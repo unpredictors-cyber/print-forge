@@ -9,16 +9,9 @@ import { Button } from '@/components/ui/button'
 import { Input, Label } from '@/components/ui/input'
 import { useToast } from '@/components/ui/toast'
 import { useAuth } from '@/lib/auth-context'
+import { validateEmail } from '@/lib/validation'
 
 type FieldErrors = Record<string, string>
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validateEmail(value: string): string | null {
-  if (!value.trim()) return 'Email is required.'
-  if (!EMAIL_RE.test(value.trim())) return 'Enter a valid email address.'
-  return null
-}
 
 function validatePassword(value: string): string | null {
   if (!value) return 'Password is required.'
