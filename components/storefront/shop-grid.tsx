@@ -4,24 +4,25 @@ import { Search, SlidersHorizontal } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { ProductCard } from '@/components/storefront/product-card'
-import { CATEGORIES, mockProducts, mockReviews } from '@/data/mockData'
+import { CATEGORIES } from '@/data/mockData'
+import type { Product, Review } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
-export function ShopGrid() {
+export function ShopGrid({ products: catalogProducts, reviews }: { products: Product[]; reviews: Review[] }) {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('newest')
 
   const products = useMemo(() => {
     const query = search.trim().toLowerCase()
-    return mockProducts
+    return catalogProducts
       .filter((product) => product.is_published)
       .filter((product) => category === 'all' || product.category_tags.includes(category))
       .filter((product) => !query || product.name.toLowerCase().includes(query))
       .sort((a, b) => {
         if (sort === 'price-low') return a.price - b.price
         if (sort === 'price-high') return b.price - a.price
-        return mockProducts.indexOf(a) - mockProducts.indexOf(b)
+        return catalogProducts.indexOf(a) - catalogProducts.indexOf(b)
       })
   }, [search, category, sort])
 
