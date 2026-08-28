@@ -30,6 +30,24 @@ function normalizeRole(role: string | null | undefined): Role {
   return 'CUSTOMER'
 }
 
+function profileFromAuthUser(authUser: {
+  id: string
+  email?: string
+  user_metadata?: { full_name?: string; name?: string }
+  created_at?: string
+}): Profile {
+  return {
+    id: authUser.id,
+    email: authUser.email ?? '',
+    full_name: authUser.user_metadata?.full_name ?? authUser.user_metadata?.name ?? '',
+    role: 'CUSTOMER',
+    scopes: [],
+    phone: null,
+    address: null,
+    created_at: authUser.created_at ?? '',
+  }
+}
+
 async function fetchProfile(userId: string): Promise<Profile | null> {
   const client = getClient()
   const { data } = await client
@@ -57,26 +75,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const client = getClient()
 
+    let cancelled = false
+
+    async function applySession(session: Awaited<ReturnType<typeof client.auth.getSession>>['data']['session']) {
+      if (!session?.user) {
+        if (!cancelled) setUser(null)
+        return
+      }
+
+      const profile = await fetchProfile(session.user.id)
+      if (cancelled) return
+      setUser(profile ?? profileFromAuthUser(session.user))
+    }
+
     async function init() {
       const { data: { session } } = await client.auth.getSession()
-      if (session?.user) {
-        const profile = await fetchProfile(session.user.id)
-        if (profile) setUser(profile)
-      }
-      setIsLoading(false)
+      await applySession(session)
+      if (!cancelled) setIsLoading(false)
     }
     init()
 
     const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
-      (async () => {
-        if (session?.user) {
-          const profile = await fetchProfile(session.user.id)
-          setUser(profile)
-        } else {
-          setUser(null)
-        }
-      })()
+      void applySession(session).finally(() => {
+        if (!cancelled) setIsLoading(false)
+      })
     })
+
+    return () => {
+      cancelled = true
+      subscription.unsubscribe()
+    }
 
     return () => subscription.unsubscribe()
   }, [])
