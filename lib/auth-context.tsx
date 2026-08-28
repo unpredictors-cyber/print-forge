@@ -141,34 +141,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function signUp(name: string, email: string, password: string): Promise<AuthResult> {
     if (!isValidEmail(email)) return { ok: false, message: 'Enter a valid email address.' }
     const client = getClient()
-    const { data, error } = await client.auth.signUp({ email: email.trim().toLowerCase(), password })
+    const normalizedEmail = email.trim().toLowerCase()
+    const { data, error } = await client.auth.signUp({
+      email: normalizedEmail,
+      password,
+      options: {
+        data: { full_name: name.trim(), name: name.trim() },
+        emailRedirectTo:
+          process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ??
+          `${window.location.origin}/auth/callback`,
+      },
+    })
     if (error) {
-      if (error.message.toLowerCase().includes('already')) {
+      const message = error.message.toLowerCase()
+      if (message.includes('already') || message.includes('registered')) {
         return { ok: false, message: 'An account with this email already exists — sign in instead.' }
       }
-      return { ok: false, message: error.message }
+      if (message.includes('rate limit') || message.includes('too many')) {
+        return { ok: false, message: 'Too many signup attempts. Please try again later.' }
+      }
+      return { ok: false, message: 'We could not create your account. Please try again.' }
     }
     if (!data.user) return { ok: false, message: 'We could not create your account. Please try again.' }
 
-    // When email confirmation is disabled, Supabase returns a session immediately.
-    // Keep this fallback for projects that return a user without an active session.
+    // With email confirmation disabled, Supabase returns the authenticated session here.
+    // Do not call signInWithPassword as a signup fallback: when confirmation is enabled,
+    // that secondary call produces a misleading login error after successful account creation.
     if (!data.session) {
-      const { error: signInError } = await client.auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
-        password,
-      })
-      if (signInError) {
-        return { ok: false, message: 'Account created, but sign-in is not available yet. Please check the Supabase email confirmation setting.' }
+      return {
+        ok: false,
+        message: 'Your account was created. Please confirm your email before signing in.',
       }
     }
 
-    await client.from('profiles').upsert({
+    const { error: profileError } = await client.from('profiles').upsert({
       id: data.user.id,
-      email: email.trim().toLowerCase(),
+      email: normalizedEmail,
       full_name: name.trim(),
       role: 'customer',
       scopes: [],
-    })
+    }, { onConflict: 'id' })
+    if (profileError) {
+      return { ok: false, message: 'Your account was created, but we could not finish setting up your profile.' }
+    }
 
     return { ok: true, message: 'Account created successfully.' }
   }
