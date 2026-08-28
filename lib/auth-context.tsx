@@ -68,6 +68,27 @@ async function fetchProfile(userId: string): Promise<Profile | null> {
   }
 }
 
+async function ensureProfile(authUser: {
+  id: string
+  email?: string
+  user_metadata?: { full_name?: string; name?: string }
+  created_at?: string
+}): Promise<Profile> {
+  const fallback = profileFromAuthUser(authUser)
+  const client = getClient()
+  await client.from('profiles').upsert(
+    {
+      id: authUser.id,
+      email: fallback.email,
+      full_name: fallback.full_name,
+      role: 'customer',
+      scopes: [],
+    },
+    { onConflict: 'id', ignoreDuplicates: true },
+  )
+  return (await fetchProfile(authUser.id)) ?? fallback
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -85,7 +106,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const profile = await fetchProfile(session.user.id)
       if (cancelled) return
-      setUser(profile ?? profileFromAuthUser(session.user))
+      setUser(profile ?? (await ensureProfile(session.user)))
     }
 
     async function init() {
