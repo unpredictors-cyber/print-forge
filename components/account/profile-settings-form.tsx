@@ -5,16 +5,17 @@ import { User, Phone, MapPin, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input, Label } from '@/components/ui/input'
 import { useToast } from '@/components/ui/toast'
-import { mockCurrentUser } from '@/data/mockData'
+import { useAuth } from '@/lib/auth-context'
 
 export function ProfileSettingsForm() {
+  const { user } = useAuth()
   const { toast } = useToast()
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
-    fullName: mockCurrentUser.full_name ?? '',
-    email: mockCurrentUser.email,
-    phone: mockCurrentUser.phone ?? '',
-    address: mockCurrentUser.address ?? '',
+    fullName: user?.full_name ?? '',
+    email: user?.email ?? '',
+    phone: user?.phone ?? '',
+    address: user?.address ?? '',
   })
 
   function update(field: keyof typeof form, value: string) {

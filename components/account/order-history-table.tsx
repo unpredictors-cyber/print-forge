@@ -36,7 +36,12 @@ export function OrderHistoryTable() {
 
   return (
     <div className="flex flex-col gap-4">
-      {mockOrders.map((order) => {
+      {mockOrders.length === 0 ? (
+        <div className="rounded-md border border-dashed border-border px-5 py-10 text-center">
+          <p className="font-medium text-foreground">No orders yet</p>
+          <p className="mt-1 text-sm text-muted-foreground">Your completed orders will appear here.</p>
+        </div>
+      ) : mockOrders.map((order) => {
         const isCancelled = cancelledOrders.includes(order.id)
         const displayStatus = isCancelled ? 'CANCELLED' : order.status
         const canCancel = !isCancelled && (order.status === 'PENDING' || order.status === 'IN_PRODUCTION')
