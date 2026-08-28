@@ -126,7 +126,7 @@ export function AuthForm({ mode, compact = false }: { mode: 'login' | 'register'
         setFormError(
           attempts >= 3
             ? 'Having trouble? Check your email and password, or reset your password.'
-            : 'Incorrect email or password. Please try again.',
+            : result.message,
         )
         setLoading(false)
         return
